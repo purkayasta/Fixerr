@@ -70,6 +70,40 @@ namespace FixSharp
             return historicResponse;
         }
 
+        /// <summary>
+        /// The Fixer API comes with a separate currency conversion endpoint, which can be used to convert any amount from one currency to another. 
+        /// In order to convert currencies, 
+        /// please use the API's convert endpoint, append the from and to parameters and set them to your preferred base and target currency codes.
+        /// 
+        /// It is also possible to convert currencies using historical exchange rate data. 
+        /// To do this, please also use the API's date parameter and set it to your preferred date. (format YYYY-MM-DD)
+        /// </summary>
+        /// <param name="from">[required] The three-letter currency code of the currency you would like to convert from.</param>
+        /// <param name="to">[required] The three-letter currency code of the currency you would like to convert to.</param>
+        /// <param name="amount">[required] The amount to be converted.</param>
+        /// <param name="historialDate">[optional] Specify a date (format YYYY-MM-DD) to use historical rates for this conversion.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public async ValueTask<CurrencyConvertResponse> GetConvertionAsync(string from, string to, int amount, string historialDate = null)
+        {
+            StringBuilder urlBuilder = new();
+            urlBuilder.Append("convert");
+            urlBuilder.Append($"?access_key={FixerConstants.ApiKey}");
+            if (string.IsNullOrEmpty(from)) throw new ArgumentException("From parameter is required");
+            if (string.IsNullOrEmpty(to)) throw new ArgumentException("To parameter is required");
+            if (amount < 0) throw new ArgumentException("Amount is required");
 
+            urlBuilder.Append("&from={from}");
+            urlBuilder.Append("&to={to}");
+            urlBuilder.Append("&amount={amount}");
+
+            if (!string.IsNullOrEmpty(historialDate))
+                if (DateOnly.TryParse(historialDate, out var date))
+                    urlBuilder.Append($"date={date.ToString("YYYY-MM-DD")}");
+
+            var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
+            var currencyConvertionResponse = await JsonSerializer.DeserializeAsync<CurrencyConvertResponse>(streamResponse);
+            return currencyConvertionResponse;
+        }
     }
 }
