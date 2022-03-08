@@ -5,8 +5,14 @@ namespace FixSharp.Models
     /// <summary>
     /// Error Response model in return type
     /// </summary>
-    public class ErrorResponse
+    public class BaseResponse
     {
+        // <summary>
+        /// Returns true or false depending on whether or not your API request has succeeded.\
+        /// </summary>
+        [JsonPropertyName("success")]
+        public bool Success { get; set; }
+
         [JsonPropertyName("error")]
         public ErrorInfo ErrorInfo { get; set; }
     }

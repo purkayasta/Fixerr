@@ -48,5 +48,28 @@ namespace FixSharp
             var symbolResponse = await JsonSerializer.DeserializeAsync<SymbolResponse>(streamResponse);
             return symbolResponse;
         }
+
+        /// <summary>
+        /// Historical rates are available for most currencies all the way back to the year of 1999. You can query the Fixer API for historical rates by appending a date (format YYYY-MM-DD) to the base URL.
+        /// </summary>
+        /// <param name="sourceDate">Historic Data Only (YYYY-MM-DD)</param>
+        /// <param name="baseCurrency">your choice of currency!</param>
+        /// <param name="symbols">Comma separated country's name</param>
+        /// <returns></returns>
+        public async ValueTask<HistoricRateResponse> GetHistoricRateAsync(DateOnly sourceDate, string baseCurrency = null, string symbols = null)
+        {
+            StringBuilder urlBuilder = new();
+            urlBuilder.Append(sourceDate.ToString("YYYY-MM-DD"));
+            urlBuilder.Append($"?access_key={FixerConstants.ApiKey}");
+
+            if (!string.IsNullOrEmpty(baseCurrency)) urlBuilder.Append($"&base={baseCurrency}");
+            if (!string.IsNullOrEmpty(symbols)) urlBuilder.Append($"symbols={symbols}");
+
+            var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
+            var historicResponse = await JsonSerializer.DeserializeAsync<HistoricRateResponse>(streamResponse);
+            return historicResponse;
+        }
+
+
     }
 }

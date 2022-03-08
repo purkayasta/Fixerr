@@ -2,11 +2,8 @@
 
 namespace FixSharp.Models
 {
-    public class SymbolResponse : ErrorResponse
+    public class SymbolResponse : BaseResponse
     {
-        [JsonPropertyName("success")]
-        public bool Success { get; set; }
-
         [JsonPropertyName("symbols")]
         public Dictionary<string, string> Symbols { get; set; }
     }

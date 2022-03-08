@@ -2,14 +2,8 @@
 
 namespace FixSharp.Models
 {
-    public class LatestRateResponse : ErrorResponse
+    public class LatestRateResponse : BaseResponse
     {
-        /// <summary>
-        /// Returns true or false depending on whether or not your API request has succeeded.\
-        /// </summary>
-        [JsonPropertyName("success")]
-        public bool Success { get; set; }
-
         /// <summary>
         /// Returns the exact date and time (UNIX time stamp) the given rates were collected.
         /// </summary>
