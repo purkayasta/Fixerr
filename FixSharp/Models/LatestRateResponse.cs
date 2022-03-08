@@ -2,7 +2,7 @@
 
 namespace FixSharp.Models
 {
-    public struct LatestRates
+    public class LatestRateResponse : ErrorResponse
     {
         /// <summary>
         /// Returns true or false depending on whether or not your API request has succeeded.\

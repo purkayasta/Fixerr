@@ -15,7 +15,13 @@ namespace FixSharp
             _httpClient = httpClient;
         }
 
-        public async ValueTask<LatestRates> GetLatest(string baseCurrency = null, string symbols = null)
+        /// <summary>
+        /// Get Latest Rates
+        /// </summary>
+        /// <param name="baseCurrency">Give the base currency, By Default base currency will be set to EUR by the API</param>
+        /// <param name="symbols">Comma separated country's name</param>
+        /// <returns></returns>
+        public async ValueTask<LatestRateResponse> GetLatestAsync(string baseCurrency = null, string symbols = null)
         {
             StringBuilder urlBuilder = new();
             urlBuilder.Append("latest");
@@ -23,8 +29,9 @@ namespace FixSharp
             if (!string.IsNullOrEmpty(baseCurrency)) urlBuilder.Append($"&base={baseCurrency}");
             if (!string.IsNullOrEmpty(symbols)) urlBuilder.Append($"symbols={symbols}");
 
-            var stream = await _httpClient.GetStreamAsync(urlBuilder.ToString());
-            return await JsonSerializer.DeserializeAsync<LatestRates>(stream);
+            var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
+            var latestResponse = await JsonSerializer.DeserializeAsync<LatestRateResponse>(streamResponse);
+            return latestResponse;
         }
     }
 }
