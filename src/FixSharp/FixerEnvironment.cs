@@ -1,4 +1,9 @@
-﻿namespace Fixerr
+﻿// ---------------------------------------------------------------
+// Copyright (c) Pritom Purkayasta All rights reserved.
+// FREE TO USE TO CONNECT THE WORLD
+// ---------------------------------------------------------------
+
+namespace Fixerr
 {
     /// <summary>
     /// This class allows developers to set two fields
@@ -35,7 +40,7 @@
             set { _apiKey = value; }
             get
             {
-                if (_apiKey is null)
+                if (string.IsNullOrEmpty(_apiKey))
                     throw new NullReferenceException($"{nameof(ApiKey)} is empty! Please Set the appropiate value");
                 return _apiKey;
             }

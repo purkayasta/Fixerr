@@ -1,4 +1,9 @@
-﻿using Fixerr.Models;
+﻿// ---------------------------------------------------------------
+// Copyright (c) Pritom Purkayasta All rights reserved.
+// FREE TO USE TO CONNECT THE WORLD
+// ---------------------------------------------------------------
+
+using Fixerr.Models;
 
 namespace Fixerr
 {

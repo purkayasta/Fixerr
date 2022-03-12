@@ -1,4 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿// ---------------------------------------------------------------
+// Copyright (c) Pritom Purkayasta All rights reserved.
+// FREE TO USE TO CONNECT THE WORLD
+// ---------------------------------------------------------------
+
+
+using System.Text.Json.Serialization;
 
 namespace Fixerr.Models
 {
