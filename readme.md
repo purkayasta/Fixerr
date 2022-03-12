@@ -9,7 +9,7 @@ Before starting, make sure you have a api key, because without one it won't work
 - [x] Historic Endpoint
 - [x] Convert Endpoint
 - [x] TimeSeries Endpoint
-- [ ] Fluctuation Endpoint
+- [x] Fluctuation Endpoint
 
 
 ## Overall Api Status
