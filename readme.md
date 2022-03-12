@@ -8,10 +8,10 @@ Before starting, make sure you have a api key, because without one it won't work
 - [x] Symbol Endpoint
 - [x] Historic Endpoint
 - [x] Convert Endpoint
-- [ ] TimeSeries Endpoint
+- [x] TimeSeries Endpoint
 - [ ] Fluctuation Endpoint
 
 
 ## Overall Api Status
-- [ ] Access Key Configuration with and without DI.
+- [x] Access Key Configuration with and without DI.
 - [ ] Test Case for every endpoint
