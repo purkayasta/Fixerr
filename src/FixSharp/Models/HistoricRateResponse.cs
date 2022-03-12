@@ -11,7 +11,7 @@ namespace Fixerr.Models
         public DateTime? Date { get; set; }
 
         [JsonPropertyName("timestamp")]
-        public int TimeStamp { get; set; }
+        public int? TimeStamp { get; set; }
 
         [JsonPropertyName("base")]
         public string Base { get; set; }

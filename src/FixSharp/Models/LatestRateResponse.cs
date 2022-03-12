@@ -8,7 +8,7 @@ namespace Fixerr.Models
         /// Returns the exact date and time (UNIX time stamp) the given rates were collected.
         /// </summary>
         [JsonPropertyName("timestamp")]
-        public int TimeStamp { get; set; }
+        public int? TimeStamp { get; set; }
 
         /// <summary>
         /// Returns the three-letter currency code of the base currency used for this request.
