@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FixSharp.Models
+namespace Fixerr.Models
 {
     public class LatestRateResponse : BaseResponse
     {
@@ -8,7 +8,7 @@ namespace FixSharp.Models
         /// Returns the exact date and time (UNIX time stamp) the given rates were collected.
         /// </summary>
         [JsonPropertyName("timestamp")]
-        public string TimeStamp { get; set; }
+        public int TimeStamp { get; set; }
 
         /// <summary>
         /// Returns the three-letter currency code of the base currency used for this request.
@@ -18,7 +18,7 @@ namespace FixSharp.Models
         public string Base { get; set; }
 
         [JsonPropertyName("date")]
-        public DateOnly Date { get; set; }
+        public DateTime? Date { get; set; }
 
         /// <summary>
         /// Returns exchange rate data for the currencies you have requested.

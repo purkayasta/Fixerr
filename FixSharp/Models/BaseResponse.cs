@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FixSharp.Models
+namespace Fixerr.Models
 {
     /// <summary>
     /// Error Response model in return type

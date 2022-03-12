@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FixSharp.Models
+namespace Fixerr.Models
 {
     public class HistoricRateResponse : BaseResponse
     {
@@ -8,7 +8,7 @@ namespace FixSharp.Models
         public bool Historical { get; set; }
 
         [JsonPropertyName("date")]
-        public DateOnly Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [JsonPropertyName("timestamp")]
         public int TimeStamp { get; set; }

@@ -1,4 +1,7 @@
-# FixerSharp - A minimal performant c# client for [Fixer.io](https://fixer.io/)
+# Fixerr - A minimal c# client for [Fixer.io](https://fixer.io/)
+
+## Usage:
+Before starting, make sure you have a api key, because without one it won't work.
 
 ## Api Cover
 - [x] Latest Endpoint

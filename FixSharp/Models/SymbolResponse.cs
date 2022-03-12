@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FixSharp.Models
+namespace Fixerr.Models
 {
     public class SymbolResponse : BaseResponse
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FixSharp.Models
+namespace Fixerr.Models
 {
     public class CurrencyConvertResponse : BaseResponse
     {
@@ -14,7 +14,7 @@ namespace FixSharp.Models
         public bool IsHistorical { get; set; }
 
         [JsonPropertyName("date")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [JsonPropertyName("result")]
         public double ConvertionResult { get; set; }

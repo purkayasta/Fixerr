@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FixSharp\FixSharp.csproj" />
+    <ProjectReference Include="..\FixSharp\Fixerr.csproj" />
   </ItemGroup>
 
 </Project>
