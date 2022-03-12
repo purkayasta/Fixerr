@@ -55,5 +55,17 @@ namespace Fixerr
         /// <param name="symbols">symbols those are comma separated like => JPY, EURO, USD</param>
         /// <returns>TimeSeriesResponse</returns>
         ValueTask<TimeSeriesResponse> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null);
+
+        /// <summary>
+        /// Using the Fixer API's fluctuation endpoint you will be able to retrieve information about how currencies fluctuate on a day-to-day basis. 
+        /// To use this feature, simply append a start_date and end_date and choose which currencies (symbols) you would like to query the API for. 
+        /// Please note that the maximum allowed timeframe is 365 days.
+        /// </summary>
+        /// <param name="startDate">string date format should be in YYYY-MM-DD</param>
+        /// <param name="endDate">string date format should be in YYYY-MM-DD</param>
+        /// <param name="baseCurrency">3 digit base currency code like => USD</param>
+        /// <param name="symbols">symbols those are comma separated like => JPY, EURO, USD</param>
+        /// <returns>FluctuationResponse</returns>
+        ValueTask<FluctuationResponse> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null);
     }
 }

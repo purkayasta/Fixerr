@@ -87,7 +87,6 @@ namespace Fixerr
             if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("Start date is not in the valid date format");
             if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("End date is not in the valid date format");
 
-
             StringBuilder urlBuilder = new();
             urlBuilder.Append("timeseries");
             urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
@@ -101,6 +100,28 @@ namespace Fixerr
             var timeSeriesResponse = await JsonSerializer.DeserializeAsync<TimeSeriesResponse>(streamResponse)
                                                                  .ConfigureAwait(false);
             return timeSeriesResponse;
+        }
+        public async ValueTask<FluctuationResponse> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null)
+        {
+            if (string.IsNullOrEmpty(startDate)) throw new NullReferenceException("Start Date is Required");
+            if (string.IsNullOrEmpty(endDate)) throw new NullReferenceException("End Date is Required");
+
+            if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("Start date is not in the valid date format");
+            if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("End date is not in the valid date format");
+
+            StringBuilder urlBuilder = new();
+            urlBuilder.Append("fluctuation");
+            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"&start_date={startDate}");
+            urlBuilder.Append($"&end_date={endDate}");
+
+            if (!string.IsNullOrEmpty(baseCurrency)) urlBuilder.Append($"&base={baseCurrency}");
+            if (!string.IsNullOrEmpty(symbols)) urlBuilder.Append($"&symbols={symbols}");
+
+            var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
+            var fluctuationResponse = await JsonSerializer.DeserializeAsync<FluctuationResponse>(streamResponse)
+                                                                 .ConfigureAwait(false);
+            return fluctuationResponse;
         }
     }
 }
