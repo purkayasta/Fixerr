@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34872545-7C9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{4080045C-3806-41D3-B8DC-9BEC7D8DABD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixerWebApi", "samples\FixerWebApi\FixerWebApi.csproj", "{C98E320D-6A2A-4885-89C4-F849C1DBB256}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{4B1BF699-4912-44D1-878B-1348F0DED7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B1BF699-4912-44D1-878B-1348F0DED7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B1BF699-4912-44D1-878B-1348F0DED7CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{978B04A9-8665-41C6-A4B8-8ECDD2203B89} = {34872545-7C94-4493-A8AF-E8B9594313E6}
 		{4B1BF699-4912-44D1-878B-1348F0DED7CA} = {4080045C-3806-41D3-B8DC-9BEC7D8DABD3}
+		{C98E320D-6A2A-4885-89C4-F849C1DBB256} = {4080045C-3806-41D3-B8DC-9BEC7D8DABD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {669AE772-EB0D-41EC-A37C-94814A508D2B}
