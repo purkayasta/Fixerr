@@ -38,10 +38,14 @@ namespace Fixerr
                                                      .ConfigureAwait(false);
             return symbolResponse;
         }
-        public async ValueTask<HistoricRateResponse> GetHistoricRateAsync(DateOnly sourceDate, string baseCurrency = null, string symbols = null)
+        public async ValueTask<HistoricRateResponse> GetHistoricRateAsync(string sourceDate, string baseCurrency = null, string symbols = null)
         {
+            if (string.IsNullOrEmpty(sourceDate)) throw new ArgumentNullException($"{nameof(sourceDate)} is required");
+
+            if (!DateOnly.TryParseExact(sourceDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception($"{sourceDate} is not in the valid date format");
+
             StringBuilder urlBuilder = new();
-            urlBuilder.Append(sourceDate.ToString("YYYY-MM-DD"));
+            urlBuilder.Append(sourceDate);
             urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
 
             if (!string.IsNullOrEmpty(baseCurrency)) urlBuilder.Append($"&base={baseCurrency}");
@@ -54,25 +58,49 @@ namespace Fixerr
         }
         public async ValueTask<CurrencyConvertResponse> GetConvertionAsync(string from, string to, int amount, string historialDate = null)
         {
-            StringBuilder urlBuilder = new();
-            urlBuilder.Append("convert");
-            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
             if (string.IsNullOrEmpty(from)) throw new ArgumentException("From parameter is required");
             if (string.IsNullOrEmpty(to)) throw new ArgumentException("To parameter is required");
             if (amount < 0) throw new ArgumentException("Amount is required");
+
+            StringBuilder urlBuilder = new();
+            urlBuilder.Append("convert");
+            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
 
             urlBuilder.Append("&from={from}");
             urlBuilder.Append("&to={to}");
             urlBuilder.Append("&amount={amount}");
 
             if (!string.IsNullOrEmpty(historialDate))
-                if (DateOnly.TryParse(historialDate, out var date))
-                    urlBuilder.Append($"&date={date.ToString("YYYY-MM-DD")}");
+                if (DateOnly.TryParseExact(historialDate, FixerEnvironment.FixerDateFormat, out DateOnly _))
+                    urlBuilder.Append($"&date={historialDate}");
 
             var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
-            var currencyConvertionResponse = await JsonSerializer.DeserializeAsync<CurrencyConvertResponse>(streamResponse)
+            var convertResponse = await JsonSerializer.DeserializeAsync<CurrencyConvertResponse>(streamResponse)
                                                                  .ConfigureAwait(false);
-            return currencyConvertionResponse;
+            return convertResponse;
+        }
+        public async ValueTask<TimeSeriesResponse> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null)
+        {
+            if (string.IsNullOrEmpty(startDate)) throw new NullReferenceException("Start Date is Required");
+            if (string.IsNullOrEmpty(endDate)) throw new NullReferenceException("End Date is Required");
+
+            if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("Start date is not in the valid date format");
+            if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("End date is not in the valid date format");
+
+
+            StringBuilder urlBuilder = new();
+            urlBuilder.Append("timeseries");
+            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"&start_date={startDate}");
+            urlBuilder.Append($"&end_date={endDate}");
+
+            if (!string.IsNullOrEmpty(baseCurrency)) urlBuilder.Append($"&base={baseCurrency}");
+            if (!string.IsNullOrEmpty(symbols)) urlBuilder.Append($"&symbols={symbols}");
+
+            var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
+            var timeSeriesResponse = await JsonSerializer.DeserializeAsync<TimeSeriesResponse>(streamResponse)
+                                                                 .ConfigureAwait(false);
+            return timeSeriesResponse;
         }
     }
 }

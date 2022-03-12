@@ -23,6 +23,7 @@
                 return IsPaidSubscription ? new Uri($"https://{_baseUrl}") : new Uri($"http://{_baseUrl}");
             }
         }
+        internal static string FixerDateFormat { get; } = "yyyy-MM-dd";
 
         private static string _apiKey = string.Empty;
 
