@@ -79,6 +79,8 @@ namespace Fixerr
             if (!string.IsNullOrEmpty(historialDate))
                 if (DateOnly.TryParseExact(historialDate, FixerEnvironment.FixerDateFormat, out DateOnly _))
                     urlBuilder.Append($"&date={historialDate}");
+                else
+                    throw new Exception($" {historialDate} => is not valid, please fix it {nameof(historialDate)}");
 
             var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
             var convertResponse = await JsonSerializer.DeserializeAsync<CurrencyConvertResponse>(streamResponse)
@@ -87,8 +89,8 @@ namespace Fixerr
         }
         public async ValueTask<TimeSeriesResponse> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null)
         {
-            if (string.IsNullOrEmpty(startDate)) throw new NullReferenceException("Start Date is Required");
-            if (string.IsNullOrEmpty(endDate)) throw new NullReferenceException("End Date is Required");
+            if (string.IsNullOrEmpty(startDate)) throw new ArgumentNullException("Start Date is Required");
+            if (string.IsNullOrEmpty(endDate)) throw new ArgumentNullException("End Date is Required");
 
             if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("Start date is not in the valid date format");
             if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("End date is not in the valid date format");
@@ -109,8 +111,8 @@ namespace Fixerr
         }
         public async ValueTask<FluctuationResponse> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null)
         {
-            if (string.IsNullOrEmpty(startDate)) throw new NullReferenceException("Start Date is Required");
-            if (string.IsNullOrEmpty(endDate)) throw new NullReferenceException("End Date is Required");
+            if (string.IsNullOrEmpty(startDate)) throw new ArgumentNullException("Start Date is Required");
+            if (string.IsNullOrEmpty(endDate)) throw new ArgumentNullException("End Date is Required");
 
             if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("Start date is not in the valid date format");
             if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("End date is not in the valid date format");

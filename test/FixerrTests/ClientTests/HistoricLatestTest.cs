@@ -16,6 +16,7 @@ namespace FixerrTests.ClientTests
 
         public HistoricLatestTest()
         {
+            FixerEnvironment.ApiKey = String.Empty;
             this.historicRateFaker = new Faker<HistoricRateResponse>();
         }
 

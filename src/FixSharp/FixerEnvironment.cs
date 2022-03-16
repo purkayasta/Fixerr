@@ -40,7 +40,7 @@ namespace Fixerr
             set { _apiKey = value; }
             get
             {
-                if (string.IsNullOrEmpty(_apiKey))
+                if (string.IsNullOrEmpty(_apiKey) || string.IsNullOrWhiteSpace(_apiKey))
                     throw new NullReferenceException($"{nameof(ApiKey)} is empty! Please Set the appropiate value");
                 return _apiKey;
             }

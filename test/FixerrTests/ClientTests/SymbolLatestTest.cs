@@ -16,12 +16,14 @@ namespace FixerrTests.ClientTests
 
         public SymbolLatestTest()
         {
+            FixerEnvironment.ApiKey = String.Empty;
             this.symbolResponseFakeModel = new Faker<SymbolResponse>();
         }
 
         [Fact]
         public async Task ShouldThrowNullReferenceException_WhenApiKeyIsNotProvided()
         {
+            FixerEnvironment.ApiKey = String.Empty;
             var jsonData = JsonSerializer.Serialize("");
 
             var httpClient = FakeHttpClient.Create(jsonData);

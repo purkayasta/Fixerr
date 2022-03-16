@@ -10,11 +10,13 @@ namespace Fixerr
     public interface IFixerClient
     {
         /// <summary>
-        /// The Fixer API comes with a separate currency conversion endpoint, which can be used to convert any amount from one currency to another. 
-        /// In order to convert currencies, 
+        /// <para> The Fixer API comes with a separate currency conversion endpoint, which can be used to convert any amount from one currency to another. In order to convert currencies, 
+        /// </para>
+        /// <para>
         /// please use the API's convert endpoint, append the from and to parameters and set them to your preferred base and target currency codes.
         /// It is also possible to convert currencies using historical exchange rate data. 
-        /// To do this, please also use the API's date parameter and set it to your preferred date. (format YYYY-MM-DD)
+        /// </para>
+        /// <para>To do this, please also use the API's date parameter and set it to your preferred date. (format YYYY-MM-DD)</para>
         /// </summary>
         /// <param name="from">[required] The three-letter currency code of the currency you would like to convert from.</param>
         /// <param name="to">[required] The three-letter currency code of the currency you would like to convert to.</param>

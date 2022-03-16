@@ -59,4 +59,4 @@ If anything happens make sure to report using the github issues. Thanks!
 
 ## Overall Api Status
 - [x] Access Key Configuration with and without DI.
-- [ ] Test Case for every endpoint (In Process)
+- [x] Test Case for every endpoint.

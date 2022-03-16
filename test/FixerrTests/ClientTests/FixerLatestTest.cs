@@ -17,12 +17,14 @@ namespace FixerrTests.ClientTests
 
         public FixerLatestTest()
         {
+            FixerEnvironment.ApiKey = String.Empty;
             rateFaker = new Faker<LatestRateResponse>();
         }
 
         [Fact]
         public async Task ShouldThrowNullReferenceException_WhenApiKeyIsNotProvided()
         {
+            FixerEnvironment.ApiKey = String.Empty;
             var jsonData = JsonSerializer.Serialize("");
 
             var httpClient = FakeHttpClient.Create(jsonData);
