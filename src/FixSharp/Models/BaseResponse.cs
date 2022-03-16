@@ -10,6 +10,8 @@ namespace Fixerr.Models
     /// <summary>
     /// Error Response model in return type
     /// </summary>
+    /// 
+    [Serializable]
     public class BaseResponse
     {
         // <summary>
@@ -22,6 +24,7 @@ namespace Fixerr.Models
         public ErrorInfo ErrorInfo { get; set; }
     }
 
+    [Serializable]
     public class ErrorInfo
     {
         [JsonPropertyName("code")]

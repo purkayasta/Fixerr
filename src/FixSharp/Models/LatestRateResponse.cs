@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Fixerr.Models
 {
+    [Serializable]
     public class LatestRateResponse : BaseResponse
     {
         /// <summary>

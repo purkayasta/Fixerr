@@ -10,12 +10,12 @@ using Fixerr.Models;
 
 namespace Fixerr
 {
-    public sealed class FixerClient : IFixerClient
+    public class FixerClient : IFixerClient
     {
         private readonly HttpClient _httpClient;
         public FixerClient(HttpClient httpClient)
         {
-            httpClient = httpClient ?? throw new ArgumentNullException("HTTP Client instance is null, please make sure you have passed the proper and good HTTP client");
+            httpClient = httpClient ?? throw new NullReferenceException("HTTP Client instance is null, please make sure you have passed the proper and good HTTP client");
             httpClient.BaseAddress = FixerEnvironment.BaseUrl;
             _httpClient = httpClient;
         }
