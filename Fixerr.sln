@@ -5,6 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WIKI", "WIKI", "{5ECCE7CC-4A4E-4FDF-9E9F-754BC8BEABE9}"
 	ProjectSection(SolutionItems) = preProject
+		license.txt = license.txt
 		readme.md = readme.md
 	EndProjectSection
 EndProject
@@ -20,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixerWebApi", "samples\Fixe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{34995DFE-20FE-4DF2-B7B5-244C3562213E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixerrTests", "test\FixerrTests\FixerrTests.csproj", "{E748B766-D303-4810-9936-0040E546307E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixerrTests", "test\FixerrTests\FixerrTests.csproj", "{E748B766-D303-4810-9936-0040E546307E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

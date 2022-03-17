@@ -1,4 +1,11 @@
-﻿# Fixerr - A minimal c# client for [Fixer.io](https://fixer.io/)
+﻿# Fixerr - An easy, minimal c# client for [Fixer.io](https://fixer.io/)
+
+Fixer is a popular freemium currency conversion site. Fixerr can help you to transform your currency more faster 😋
+
+![Nuget](https://img.shields.io/nuget/v/FixerClient)
+![Nuget](https://img.shields.io/nuget/dt/FixerClient?style=plastic)
+
+[Nuget](https://www.nuget.org/packages/FixerClient/)
 
 ## Usage:
 Requirements:

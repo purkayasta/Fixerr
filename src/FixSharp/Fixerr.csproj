@@ -3,10 +3,23 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
+
+		<IsPackable>true</IsPackable>
+		<PackageId>FixerClient</PackageId>
+		<Version>1.0.0</Version>
+		<PackageTags>C#, Dotnet Core, Fixer.io, Currency Exchange, Currency Conversion, Fixer Api Client</PackageTags>
+		<Description>Unofficial api client for Fixer.IO</Description>
+		<Authors>Pritom Purkayasta</Authors>
+		<RepositoryType>Git</RepositoryType>
+		<RepositoryUrl>https://github.com/purkayasta/Fixerr</RepositoryUrl>
+		<Copyright>
+			Copyright (c) Pritom Purkayasta All rights reserved.
+			FREE TO USE TO CONNECT THE WORLD
+		</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="System.Text.Json" Version="6.0.2" />
+		<PackageReference Include="System.Text.Json" Version="6.0.2" />
 	</ItemGroup>
 
 </Project>
