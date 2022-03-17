@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Bogus;
 using Fixerr;
 using Fixerr.Models;
-using FixerrTests.Helper;
 using Xunit;
 
 namespace FixerrTests.ClientTests
@@ -16,35 +14,25 @@ namespace FixerrTests.ClientTests
 
         public SymbolLatestTest()
         {
-            FixerEnvironment.ApiKey = String.Empty;
             this.symbolResponseFakeModel = new Faker<SymbolResponse>();
         }
 
         [Fact]
         public async Task ShouldThrowNullReferenceException_WhenApiKeyIsNotProvided()
         {
-            FixerEnvironment.ApiKey = String.Empty;
-            var jsonData = JsonSerializer.Serialize("");
-
-            var httpClient = FakeHttpClient.Create(jsonData);
-
+            var httpClient = ConfigureDefault.Get("");
             this.systemUnderTest = new FixerClient(httpClient);
-
             await Assert.ThrowsAsync<NullReferenceException>(async () => await this.systemUnderTest.GetSymbolAsync());
         }
 
         [Fact]
         public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
         {
-            FixerEnvironment.ApiKey = "13";
             var fakeData = this.symbolResponseFakeModel.RuleFor(x => x.Success, true).Generate();
-            var jsonData = JsonSerializer.Serialize(fakeData);
-
-            var httpClient = FakeHttpClient.Create(jsonData);
-
+            var httpClient = ConfigureDefault.Get(fakeData);
             this.systemUnderTest = new FixerClient(httpClient);
 
-            var expected = await this.systemUnderTest.GetSymbolAsync();
+            var expected = await this.systemUnderTest.GetSymbolAsync(apiKey: "123");
 
             Assert.Equal(expected.Success, fakeData.Success);
         }

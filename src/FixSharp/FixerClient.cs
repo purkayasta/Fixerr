@@ -20,11 +20,11 @@ namespace Fixerr
             _httpClient = httpClient;
         }
 
-        public async ValueTask<LatestRateResponse> GetLatestAsync(string baseCurrency = null, string symbols = null)
+        public async ValueTask<LatestRateResponse> GetLatestAsync(string baseCurrency = null, string symbols = null, string apiKey = null)
         {
             StringBuilder urlBuilder = new();
             urlBuilder.Append("latest");
-            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"?access_key={apiKey ?? FixerEnvironment.ApiKey}");
             if (!string.IsNullOrEmpty(baseCurrency)) urlBuilder.Append($"&base={baseCurrency}");
             if (!string.IsNullOrEmpty(symbols)) urlBuilder.Append($"&symbols={symbols}");
 
@@ -33,18 +33,18 @@ namespace Fixerr
                                                      .ConfigureAwait(false);
             return latestResponse;
         }
-        public async ValueTask<SymbolResponse> GetSymbolAsync()
+        public async ValueTask<SymbolResponse> GetSymbolAsync(string apiKey = null)
         {
             StringBuilder urlBuilder = new();
             urlBuilder.Append("latest");
-            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"?access_key={apiKey ?? FixerEnvironment.ApiKey}");
 
             var streamResponse = await _httpClient.GetStreamAsync(urlBuilder.ToString());
             var symbolResponse = await JsonSerializer.DeserializeAsync<SymbolResponse>(streamResponse)
                                                      .ConfigureAwait(false);
             return symbolResponse;
         }
-        public async ValueTask<HistoricRateResponse> GetHistoricRateAsync(string sourceDate, string baseCurrency = null, string symbols = null)
+        public async ValueTask<HistoricRateResponse> GetHistoricRateAsync(string sourceDate, string baseCurrency = null, string symbols = null, string apiKey = null)
         {
             if (string.IsNullOrEmpty(sourceDate)) throw new ArgumentNullException($"{nameof(sourceDate)} is required");
 
@@ -52,7 +52,7 @@ namespace Fixerr
 
             StringBuilder urlBuilder = new();
             urlBuilder.Append(sourceDate);
-            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"?access_key={apiKey ?? FixerEnvironment.ApiKey}");
 
             if (!string.IsNullOrEmpty(baseCurrency)) urlBuilder.Append($"&base={baseCurrency}");
             if (!string.IsNullOrEmpty(symbols)) urlBuilder.Append($"&symbols={symbols}");
@@ -62,7 +62,7 @@ namespace Fixerr
                                                        .ConfigureAwait(false);
             return historicResponse;
         }
-        public async ValueTask<CurrencyConvertResponse> GetConvertionAsync(string from, string to, int amount, string historialDate = null)
+        public async ValueTask<CurrencyConvertResponse> GetConvertionAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
         {
             if (string.IsNullOrEmpty(from)) throw new ArgumentException("From parameter is required");
             if (string.IsNullOrEmpty(to)) throw new ArgumentException("To parameter is required");
@@ -70,7 +70,7 @@ namespace Fixerr
 
             StringBuilder urlBuilder = new();
             urlBuilder.Append("convert");
-            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"?access_key={apiKey ?? FixerEnvironment.ApiKey}");
 
             urlBuilder.Append("&from={from}");
             urlBuilder.Append("&to={to}");
@@ -87,7 +87,7 @@ namespace Fixerr
                                                                  .ConfigureAwait(false);
             return convertResponse;
         }
-        public async ValueTask<TimeSeriesResponse> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null)
+        public async ValueTask<TimeSeriesResponse> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
         {
             if (string.IsNullOrEmpty(startDate)) throw new ArgumentNullException("Start Date is Required");
             if (string.IsNullOrEmpty(endDate)) throw new ArgumentNullException("End Date is Required");
@@ -97,7 +97,7 @@ namespace Fixerr
 
             StringBuilder urlBuilder = new();
             urlBuilder.Append("timeseries");
-            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"?access_key={apiKey ?? FixerEnvironment.ApiKey}");
             urlBuilder.Append($"&start_date={startDate}");
             urlBuilder.Append($"&end_date={endDate}");
 
@@ -109,7 +109,7 @@ namespace Fixerr
                                                                  .ConfigureAwait(false);
             return timeSeriesResponse;
         }
-        public async ValueTask<FluctuationResponse> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null)
+        public async ValueTask<FluctuationResponse> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
         {
             if (string.IsNullOrEmpty(startDate)) throw new ArgumentNullException("Start Date is Required");
             if (string.IsNullOrEmpty(endDate)) throw new ArgumentNullException("End Date is Required");
@@ -119,7 +119,7 @@ namespace Fixerr
 
             StringBuilder urlBuilder = new();
             urlBuilder.Append("fluctuation");
-            urlBuilder.Append($"?access_key={FixerEnvironment.ApiKey}");
+            urlBuilder.Append($"?access_key={apiKey ?? FixerEnvironment.ApiKey}");
             urlBuilder.Append($"&start_date={startDate}");
             urlBuilder.Append($"&end_date={endDate}");
 

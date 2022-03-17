@@ -18,7 +18,7 @@ namespace Fixerr
     /// </item>
     /// </list>
     /// </summary>
-    public sealed class FixerEnvironment
+    public class FixerEnvironment
     {
         private const string _baseUrl = "data.fixer.io/api/";
         internal static Uri BaseUrl

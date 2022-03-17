@@ -24,7 +24,7 @@ namespace Fixerr
         /// <param name="historialDate">[optional] Specify a date (format YYYY-MM-DD) to use historical rates for this conversion.</param>
         /// <returns>CurrencyConvertResponse</returns>
         /// <exception cref="ArgumentException"></exception>
-        ValueTask<CurrencyConvertResponse> GetConvertionAsync(string from, string to, int amount, string historialDate = null);
+        ValueTask<CurrencyConvertResponse> GetConvertionAsync(string from, string to, int amount, string historialDate = null, string apiKey = null);
 
         /// <summary>
         /// Historical rates are available for most currencies all the way back to the year of 1999. 
@@ -34,7 +34,7 @@ namespace Fixerr
         /// <param name="baseCurrency">3 digit currency code! like => USD</param>
         /// <param name="symbols">Comma separated currency symbols code like => USD, EURO, JPY</param>
         /// <returns>HistoricRateResponse</returns>
-        ValueTask<HistoricRateResponse> GetHistoricRateAsync(string sourceDate, string baseCurrency = null, string symbols = null);
+        ValueTask<HistoricRateResponse> GetHistoricRateAsync(string sourceDate, string baseCurrency = null, string symbols = null, string apiKey = null);
 
         /// <summary>
         /// Depending on your subscription plan, the API's latest endpoint will 
@@ -43,14 +43,14 @@ namespace Fixerr
         /// <param name="baseCurrency">Give the base currency, By Default base currency will be set to EUR by the API</param>
         /// <param name="symbols">Comma separated country's name</param>
         /// <returns>LatestRateResponse</returns>
-        ValueTask<LatestRateResponse> GetLatestAsync(string baseCurrency = null, string symbols = null);
+        ValueTask<LatestRateResponse> GetLatestAsync(string baseCurrency = null, string symbols = null, string apiKey = null);
 
         /// <summary>
         /// The Fixer API comes with a constantly updated endpoint returning all available currencies. 
         /// To access this list, make a request to the API's symbols endpoint.
         /// </summary>
         /// <returns>SymbolResponse</returns>
-        ValueTask<SymbolResponse> GetSymbolAsync();
+        ValueTask<SymbolResponse> GetSymbolAsync(string apiKey = null);
 
         /// <summary>
         /// If supported by your subscription plan, the Fixer API's timeseries endpoint 
@@ -61,7 +61,7 @@ namespace Fixerr
         /// <param name="baseCurrency">3 digit base currency code like => USD</param>
         /// <param name="symbols">symbols those are comma separated like => JPY, EURO, USD</param>
         /// <returns>TimeSeriesResponse</returns>
-        ValueTask<TimeSeriesResponse> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null);
+        ValueTask<TimeSeriesResponse> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null);
 
         /// <summary>
         /// Using the Fixer API's fluctuation endpoint you will be able to retrieve information about how currencies fluctuate on a day-to-day basis. 
@@ -73,6 +73,6 @@ namespace Fixerr
         /// <param name="baseCurrency">3 digit base currency code like => USD</param>
         /// <param name="symbols">symbols those are comma separated like => JPY, EURO, USD</param>
         /// <returns>FluctuationResponse</returns>
-        ValueTask<FluctuationResponse> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null);
+        ValueTask<FluctuationResponse> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null);
     }
 }

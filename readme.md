@@ -1,4 +1,4 @@
-# Fixerr - A minimal c# client for [Fixer.io](https://fixer.io/)
+﻿# Fixerr - A minimal c# client for [Fixer.io](https://fixer.io/)
 
 ## Usage:
 Requirements:
@@ -44,6 +44,7 @@ public async Task<IActionResult> Get()
 
 
 ## F.A.Q:
+- There is also a optional apiKey parameter is added to every method if you need to access different method with different api key. 🎉
 If anything happens make sure to report using the github issues. Thanks!
 
 
