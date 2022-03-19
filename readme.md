@@ -4,6 +4,8 @@ Fixer is a popular freemium currency conversion site. Fixerr can help you to tra
 
 ![Nuget](https://img.shields.io/nuget/v/FixerClient)
 ![Nuget](https://img.shields.io/nuget/dt/FixerClient?style=plastic)
+![Nuget](https://img.shields.io/github/repo-size/purkayasta/Fixerr?style=social)
+![Nuget](https://img.shields.io/github/last-commit/purkayasta/fixerr?style=flat-square)
 
 [Nuget](https://www.nuget.org/packages/FixerClient/)
 
