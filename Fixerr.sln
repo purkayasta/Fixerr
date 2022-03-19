@@ -5,7 +5,6 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WIKI", "WIKI", "{5ECCE7CC-4A4E-4FDF-9E9F-754BC8BEABE9}"
 	ProjectSection(SolutionItems) = preProject
-		license.txt = license.txt
 		readme.md = readme.md
 	EndProjectSection
 EndProject
