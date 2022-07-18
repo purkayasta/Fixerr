@@ -22,7 +22,7 @@ namespace FixerrTests.ClientTests
         {
             var httpClient = ConfigureDefault.Get("");
             this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<NullReferenceException>(async () => await systemUnderTest.GetLatestAsync());
+            await Assert.ThrowsAsync<NullReferenceException>(async () => await systemUnderTest.GetLatestRateAsync());
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace FixerrTests.ClientTests
 
             this.systemUnderTest = new FixerClient(httpClient);
 
-            var expected = await systemUnderTest.GetLatestAsync("USD", apiKey: "123");
+            var expected = await systemUnderTest.GetLatestRateAsync("USD", apiKey: "123");
 
             Assert.Equal(expected.Success, fakeData.Success);
         }

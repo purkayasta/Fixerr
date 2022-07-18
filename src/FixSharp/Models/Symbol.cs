@@ -5,11 +5,10 @@
 
 using System.Text.Json.Serialization;
 
-namespace Fixerr.Models
+namespace Fixerr.Models;
+
+public sealed class Symbol : BaseResponse
 {
-    public class SymbolResponse : BaseResponse
-    {
-        [JsonPropertyName("symbols")]
-        public Dictionary<string, string> Symbols { get; set; }
-    }
+    [JsonPropertyName("symbols")]
+    public Dictionary<string, string> Symbols { get; set; }
 }

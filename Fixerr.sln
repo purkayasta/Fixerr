@@ -1,60 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32210.238
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WIKI", "WIKI", "{5ECCE7CC-4A4E-4FDF-9E9F-754BC8BEABE9}"
-	ProjectSection(SolutionItems) = preProject
-		readme.md = readme.md
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44D7EE7A-BBCF-4EFF-86C9-F23F2CE53435}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixerr", "src\FixSharp\Fixerr.csproj", "{978B04A9-8665-41C6-A4B8-8ECDD2203B89}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixerConsole", "samples\FixerConsole\FixerConsole.csproj", "{4B1BF699-4912-44D1-878B-1348F0DED7CA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34872545-7C94-4493-A8AF-E8B9594313E6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{4080045C-3806-41D3-B8DC-9BEC7D8DABD3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixerWebApi", "samples\FixerWebApi\FixerWebApi.csproj", "{C98E320D-6A2A-4885-89C4-F849C1DBB256}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{34995DFE-20FE-4DF2-B7B5-244C3562213E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixerrTests", "test\FixerrTests\FixerrTests.csproj", "{E748B766-D303-4810-9936-0040E546307E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixerr", "src\FixSharp\Fixerr.csproj", "{64430A71-366C-4506-990A-D9E73A2AB466}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{978B04A9-8665-41C6-A4B8-8ECDD2203B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{978B04A9-8665-41C6-A4B8-8ECDD2203B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{978B04A9-8665-41C6-A4B8-8ECDD2203B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{978B04A9-8665-41C6-A4B8-8ECDD2203B89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B1BF699-4912-44D1-878B-1348F0DED7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B1BF699-4912-44D1-878B-1348F0DED7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B1BF699-4912-44D1-878B-1348F0DED7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B1BF699-4912-44D1-878B-1348F0DED7CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C98E320D-6A2A-4885-89C4-F849C1DBB256}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E748B766-D303-4810-9936-0040E546307E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E748B766-D303-4810-9936-0040E546307E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E748B766-D303-4810-9936-0040E546307E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E748B766-D303-4810-9936-0040E546307E}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{978B04A9-8665-41C6-A4B8-8ECDD2203B89} = {34872545-7C94-4493-A8AF-E8B9594313E6}
-		{4B1BF699-4912-44D1-878B-1348F0DED7CA} = {4080045C-3806-41D3-B8DC-9BEC7D8DABD3}
-		{C98E320D-6A2A-4885-89C4-F849C1DBB256} = {4080045C-3806-41D3-B8DC-9BEC7D8DABD3}
-		{E748B766-D303-4810-9936-0040E546307E} = {34995DFE-20FE-4DF2-B7B5-244C3562213E}
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64430A71-366C-4506-990A-D9E73A2AB466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64430A71-366C-4506-990A-D9E73A2AB466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64430A71-366C-4506-990A-D9E73A2AB466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64430A71-366C-4506-990A-D9E73A2AB466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {669AE772-EB0D-41EC-A37C-94814A508D2B}
+	GlobalSection(NestedProjects) = preSolution
+		{64430A71-366C-4506-990A-D9E73A2AB466} = {44D7EE7A-BBCF-4EFF-86C9-F23F2CE53435}
 	EndGlobalSection
 EndGlobal
