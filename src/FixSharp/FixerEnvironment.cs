@@ -4,20 +4,6 @@
 // ---------------------------------------------------------------
 
 namespace Fixerr;
-
-/// <summary>
-/// This class allows developers to set two fields
-/// <list type="number">
-/// <item>
-/// <para>ApiKey</para>
-/// <description>In order to use Fixer.io library, you will have to provide a api key. This is a mendartory requirements.</description>
-/// </item>
-/// <item>
-/// <para>IsPaidSubscription</para>
-/// <description>By default it will act as false. But if you are using the non free key, you should set this to <code>true</code></description>
-/// </item>
-/// </list>
-/// </summary>
 internal sealed class FixerEnvironment
 {
     private const string _baseUrl = "data.fixer.io/api/";

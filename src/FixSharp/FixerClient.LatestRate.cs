@@ -1,3 +1,9 @@
+// ---------------------------------------------------------------
+// Copyright (c) Pritom Purkayasta All rights reserved.
+// FREE TO USE TO CONNECT THE WORLD
+// ---------------------------------------------------------------
+
+
 using System.Text;
 using System.Text.Json;
 using Fixerr.Models;

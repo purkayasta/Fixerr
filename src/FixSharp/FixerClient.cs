@@ -11,7 +11,7 @@ public partial class FixerClient : IFixerClient
     public FixerClient(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
-        
+
         httpClient.BaseAddress = FixerEnvironment.BaseUrl;
         _httpClient = httpClient;
     }
@@ -20,9 +20,21 @@ public partial class FixerClient : IFixerClient
     {
         ArgumentNullException.ThrowIfNull(httpClient);
         ArgumentNullException.ThrowIfNull(apiKey);
-        
+
         httpClient.BaseAddress = FixerEnvironment.BaseUrl;
         FixerEnvironment.ApiKey = apiKey;
         _httpClient = httpClient;
+    }
+
+    public FixerClient(HttpClient httpClient, string apiKey, bool isPaidSubscription)
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        ArgumentNullException.ThrowIfNull(apiKey);
+
+        httpClient.BaseAddress = FixerEnvironment.BaseUrl;
+        _httpClient = httpClient;
+
+        FixerEnvironment.ApiKey = apiKey;
+        FixerEnvironment.IsPaidSubscription = isPaidSubscription;
     }
 }

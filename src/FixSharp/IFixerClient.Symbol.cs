@@ -12,7 +12,7 @@ public partial interface IFixerClient
     /// <summary>
     /// Returns all available currencies
     /// </summary>
-    /// <returns>SymbolResponse</returns>
+    /// <returns>Symbol</returns>
     Task<Symbol> GetSymbolAsync(string apiKey = null);
 
     /// <summary>
