@@ -11,7 +11,7 @@ public partial interface IFixerClient
 {
     /// <summary>returns the converted currency from one to another</summary>
     /// <returns>CurrencyConverter</returns>
-    Task<CurrencyConverter> GetConvertionAsync(string from, string to, int amount, string historialDate = null, string apiKey = null);
+    Task<CurrencyConverter> GetCurrencyConverterAsync(string from, string to, int amount, string historialDate = null, string apiKey = null);
 
     /// <summary>returns the converted currency from one to another</summary>
     /// <returns>HttpResponseMessage</returns>
@@ -19,5 +19,5 @@ public partial interface IFixerClient
 
     /// <summary>returns the converted currency from one to another</summary>
     /// <returns>string</returns>
-    Task<string> GetCurrencyConvertedStringAsync(string from, string to, int amount, string historialDate = null, string apiKey = null);
+    Task<string> GetCurrencyConverterStringAsync(string from, string to, int amount, string historialDate = null, string apiKey = null);
 }

@@ -12,7 +12,7 @@ namespace Fixerr;
 
 public partial class FixerClient : IFixerClient
 {
-    public async Task<CurrencyConverter> GetConvertionAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
+    public async Task<CurrencyConverter> GetCurrencyConverterAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
     {
         string url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
 
@@ -27,7 +27,7 @@ public partial class FixerClient : IFixerClient
         return _httpClient.GetAsync(url);
     }
 
-    public Task<string> GetCurrencyConvertedStringAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
+    public Task<string> GetCurrencyConverterStringAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
     {
         string url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
         return _httpClient.GetStringAsync(url);
