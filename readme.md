@@ -3,12 +3,12 @@
 
 Fixer is a popular freemium currency conversion site. Fixerr can help you to transform your currency more faster 😋
 
-![Nuget](https://img.shields.io/nuget/v/FixerClient)
-![Nuget](https://img.shields.io/nuget/dt/FixerClient?style=plastic)
+![Nuget](https://img.shields.io/nuget/v/Fixerr)
+![Nuget](https://img.shields.io/nuget/dt/Fixerr?style=plastic)
 ![Nuget](https://img.shields.io/github/repo-size/purkayasta/Fixerr?style=social)
 ![Nuget](https://img.shields.io/github/last-commit/purkayasta/fixerr?style=flat-square)
 
-[Nuget](https://www.nuget.org/packages/FixerClient/)
+[Nuget](https://www.nuget.org/packages/Fixerr/)
 
 ## Usage:
 ### Required Properties:
