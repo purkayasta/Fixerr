@@ -7,7 +7,7 @@ namespace Fixerr.Configurations;
 
 public static class FixerFactory
 {
-    public static IFixerClient GetFixerClient(HttpClient httpClient, string apiKey)
+    public static IFixerClient CreateFixerClient(HttpClient httpClient, string apiKey)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
         ArgumentNullException.ThrowIfNull(apiKey);
@@ -16,7 +16,7 @@ public static class FixerFactory
         return instance;
     }
 
-    public static IFixerClient GetFixerClient(HttpClient httpClient, string apiKey, bool isPaidSubscription)
+    public static IFixerClient CreateFixerClient(HttpClient httpClient, string apiKey, bool isPaidSubscription)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
         ArgumentNullException.ThrowIfNull(apiKey);
