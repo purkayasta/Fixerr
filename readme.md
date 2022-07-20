@@ -15,35 +15,32 @@ Fixer is a popular freemium currency conversion site. Fixerr can help you to tra
 - ```ApiKey```
 - ```IsPaidSubscription``` (If you bought the non free key and want to use https, you may want to set it to true)
 
-## Console Application Demo:
+## With out any dependency injection
 ``` c#
 
 var apiKey = "";
-var fixer = new FixerClient(new HttpClient(), apiKey);
+IFixerClient fixer = FixerFactory.CreateFixerClient(new HttpClient(), apiKey);
 var latest = await fixer.GetFluctuationAsync("2012-05-01", "2012-05-25");
 Console.WriteLine(latest?.Rates);
 ```
 
-## Web Api
+## With Microsoft DI
 ```c#
-builder.Services.AddFixer();
+var apiKey = "";
+builder.Services.AddFixer(apiKey);
 ```
 
-and in the controller section:
-```c#
+If you chose to go with DI approach then after service registration, you will get a `IFixerClient` that you can access all your requested method.
+```c# Injestion With DI
 private readonly IFixerClient _fixerClient;
 
-public FixerController(IFixerClient fixerClient)
-{
-    _fixerClient = fixerClient;
+public YourFunction(IFixerClient fixerClient) => _fixerClient = fixerClient;
+
+public void CallMethod() {
+    var latest = await _fixerClient.GetFluctuationAsync("2012-05-01", "2012-05-25");
+    // now do whatever 😋
 }
 
-[HttpGet]
-public async Task<IActionResult> Get()
-{
-    var response = await _fixerClient.GetLatestAsync();
-    return Ok(response);
-}
 ```
 
 ## F.A.Q:
