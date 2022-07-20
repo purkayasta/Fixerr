@@ -10,7 +10,7 @@ using Fixerr.Models;
 
 namespace Fixerr;
 
-public partial class FixerClient : IFixerClient
+internal sealed partial class FixerClient : IFixerClient
 {
     public async Task<TimeSeries> GetTimeSeriesAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
     {
@@ -37,8 +37,8 @@ public partial class FixerClient : IFixerClient
 
     private static string BuildTimeSeriesUrl(string startDate, string endDate, string baseCurrency, string symbols, string apiKey)
     {
-        if (string.IsNullOrEmpty(startDate)) throw new ArgumentNullException("Start Date is Required");
-        if (string.IsNullOrEmpty(endDate)) throw new ArgumentNullException("End Date is Required");
+        if (string.IsNullOrEmpty(startDate)) throw new InvalidDataException("Start Date is Required");
+        if (string.IsNullOrEmpty(endDate)) throw new InvalidDataException("End Date is Required");
 
         if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("Start date is not in the valid date format");
         if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("End date is not in the valid date format");

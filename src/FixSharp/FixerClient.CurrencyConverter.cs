@@ -10,7 +10,7 @@ using Fixerr.Models;
 
 namespace Fixerr;
 
-public partial class FixerClient : IFixerClient
+internal sealed partial class FixerClient : IFixerClient
 {
     public async Task<CurrencyConverter> GetCurrencyConverterAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
     {

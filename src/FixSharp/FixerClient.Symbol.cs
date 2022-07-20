@@ -10,7 +10,7 @@ using Fixerr.Models;
 
 namespace Fixerr;
 
-public partial class FixerClient : IFixerClient
+internal sealed partial class FixerClient : IFixerClient
 {
     public async Task<Symbol> GetSymbolAsync(string apiKey = null)
     {
@@ -36,7 +36,7 @@ public partial class FixerClient : IFixerClient
     private static string BuildSymbolUrl(string apiKey)
     {
         StringBuilder urlBuilder = new();
-        urlBuilder.Append("latest");
+        urlBuilder.Append("symbols");
         urlBuilder.Append($"?access_key={apiKey ?? FixerEnvironment.ApiKey}");
         return urlBuilder.ToString();
     }

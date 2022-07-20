@@ -10,7 +10,7 @@ using Fixerr.Models;
 
 namespace Fixerr;
 
-public partial class FixerClient : IFixerClient
+internal sealed partial class FixerClient : IFixerClient
 {
     public async Task<HistoricRate> GetHistoricRateAsync(string sourceDate, string baseCurrency = null, string symbols = null, string apiKey = null)
     {
@@ -35,7 +35,7 @@ public partial class FixerClient : IFixerClient
 
     private static string BuildHistoricRateUrl(string sourceDate, string baseCurrency, string symbols, string apiKey)
     {
-        if (string.IsNullOrEmpty(sourceDate)) throw new ArgumentNullException($"{nameof(sourceDate)} is required");
+        if (string.IsNullOrEmpty(sourceDate)) throw new InvalidDataException($"{nameof(sourceDate)} is required");
 
         if (!DateOnly.TryParseExact(sourceDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception($"{sourceDate} is not in the valid date format");
 

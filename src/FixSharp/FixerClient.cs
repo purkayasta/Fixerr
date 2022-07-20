@@ -5,7 +5,7 @@
 
 namespace Fixerr;
 
-public partial class FixerClient : IFixerClient
+internal sealed partial class FixerClient : IFixerClient
 {
     private readonly HttpClient _httpClient;
     public FixerClient(HttpClient httpClient)

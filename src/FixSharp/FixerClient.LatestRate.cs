@@ -10,7 +10,7 @@ using Fixerr.Models;
 
 namespace Fixerr;
 
-public partial class FixerClient : IFixerClient
+internal sealed partial class FixerClient : IFixerClient
 {
     public async Task<LatestRate> GetLatestRateAsync(string baseCurrency = null, string symbols = null, string apiKey = null)
     {
@@ -31,7 +31,7 @@ public partial class FixerClient : IFixerClient
         return _httpClient.GetStringAsync(url);
     }
 
-    private string BuildLatestRateUrl(string baseCurrency = null, string symbols = null, string apiKey = null)
+    private static string BuildLatestRateUrl(string baseCurrency = null, string symbols = null, string apiKey = null)
     {
         StringBuilder urlBuilder = new();
         urlBuilder.Append("latest");

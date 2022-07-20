@@ -9,11 +9,11 @@ using Fixerr.Models;
 
 namespace Fixerr;
 
-public partial class FixerClient
+internal sealed partial class FixerClient : IFixerClient
 {
     public async Task<Fluctuation> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
     {
-        string url = BuildTimeSeriesUrl(startDate, endDate, baseCurrency, symbols, apiKey);
+        string url = BuildFluctuationUrl(startDate, endDate, baseCurrency, symbols, apiKey);
 
         var streamResponse = await _httpClient.GetStreamAsync(url);
         var fluctuationResponse = await JsonSerializer.DeserializeAsync<Fluctuation>(streamResponse).ConfigureAwait(false);
@@ -22,7 +22,7 @@ public partial class FixerClient
 
     public Task<HttpResponseMessage> GetFluctuationRawAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
     {
-        string url = BuildTimeSeriesUrl(startDate, endDate, baseCurrency, symbols, apiKey);
+        string url = BuildFluctuationUrl(startDate, endDate, baseCurrency, symbols, apiKey);
         return _httpClient.GetAsync(url);
     }
 
@@ -34,8 +34,8 @@ public partial class FixerClient
 
     private static string BuildFluctuationUrl(string startDate, string endDate, string baseCurrency, string symbols, string apiKey)
     {
-        if (string.IsNullOrEmpty(startDate)) throw new ArgumentNullException("Start Date is Required");
-        if (string.IsNullOrEmpty(endDate)) throw new ArgumentNullException("End Date is Required");
+        if (string.IsNullOrEmpty(startDate)) throw new InvalidDataException("Start Date is Required");
+        if (string.IsNullOrEmpty(endDate)) throw new InvalidDataException("End Date is Required");
 
         if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("Start date is not in the valid date format");
         if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new Exception("End date is not in the valid date format");
