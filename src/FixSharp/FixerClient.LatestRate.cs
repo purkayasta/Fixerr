@@ -6,6 +6,7 @@
 
 using System.Text;
 using System.Text.Json;
+using Fixerr.Configurations;
 using Fixerr.Models;
 
 namespace Fixerr;
@@ -15,20 +16,20 @@ internal sealed partial class FixerClient : IFixerClient
     public async Task<LatestRate> GetLatestRateAsync(string baseCurrency = null, string symbols = null, string apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
-        var streamResponse = await _httpClient.GetStreamAsync(url);
+        var streamResponse = await HttpClient.GetStreamAsync(url);
         return await JsonSerializer.DeserializeAsync<LatestRate>(streamResponse).ConfigureAwait(false);
     }
 
     public Task<HttpResponseMessage> GetLatestRateRawAsync(string baseCurrency = null, string symbols = null, string apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
-        return _httpClient.GetAsync(url);
+        return HttpClient.GetAsync(url);
     }
 
     public Task<string> GetLatestRateStringAsync(string baseCurrency = null, string symbols = null, string apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
-        return _httpClient.GetStringAsync(url);
+        return HttpClient.GetStringAsync(url);
     }
 
     private static string BuildLatestRateUrl(string baseCurrency = null, string symbols = null, string apiKey = null)

@@ -6,6 +6,7 @@
 
 using System.Text;
 using System.Text.Json;
+using Fixerr.Configurations;
 using Fixerr.Models;
 
 namespace Fixerr;
@@ -16,7 +17,7 @@ internal sealed partial class FixerClient : IFixerClient
     {
         string url = BuildSymbolUrl(apiKey);
 
-        var streamResponse = await _httpClient.GetStreamAsync(url);
+        var streamResponse = await HttpClient.GetStreamAsync(url);
         var symbolResponse = await JsonSerializer.DeserializeAsync<Symbol>(streamResponse).ConfigureAwait(false);
         return symbolResponse;
     }
@@ -24,13 +25,13 @@ internal sealed partial class FixerClient : IFixerClient
     public Task<HttpResponseMessage> GetSymbolRawAsync(string apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
-        return _httpClient.GetAsync(url);
+        return HttpClient.GetAsync(url);
     }
 
     public Task<string> GetSymbolStringAsync(string apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
-        return _httpClient.GetStringAsync(url);
+        return HttpClient.GetStringAsync(url);
     }
 
     private static string BuildSymbolUrl(string apiKey)

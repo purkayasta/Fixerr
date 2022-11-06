@@ -3,9 +3,11 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
-namespace Fixerr;
+namespace Fixerr.Configurations;
 internal sealed class FixerEnvironment
 {
+    internal const string httpClientName = "FixerHttpClient";
+
     private const string _baseUrl = "data.fixer.io/api/";
     internal static Uri BaseUrl
     {

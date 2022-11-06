@@ -3,38 +3,39 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using Fixerr.Configurations;
+using Microsoft.Extensions.Options;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("FixerrTests")]
 namespace Fixerr;
 
-internal sealed partial class FixerClient : IFixerClient
+internal partial class FixerClient : IFixerClient
 {
-    private readonly HttpClient _httpClient;
-    public FixerClient(HttpClient httpClient)
-    {
-        ArgumentNullException.ThrowIfNull(httpClient);
+    private HttpClient HttpClient { get; set; }
 
-        httpClient.BaseAddress = FixerEnvironment.BaseUrl;
-        _httpClient = httpClient;
+    public FixerClient(IHttpClientFactory httpClientFactory, IOptions<FixerOptions> options)
+        : this(httpClientFactory.CreateClient(FixerEnvironment.httpClientName), options)
+    {
+        ArgumentNullException.ThrowIfNull(httpClientFactory);
     }
 
-    public FixerClient(HttpClient httpClient, string apiKey)
+    public FixerClient(HttpClient httpClient, IOptions<FixerOptions> options)
+        : this(options)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
-        ArgumentNullException.ThrowIfNull(apiKey);
 
         httpClient.BaseAddress = FixerEnvironment.BaseUrl;
-        FixerEnvironment.ApiKey = apiKey;
-        _httpClient = httpClient;
+
+        this.HttpClient = httpClient;
     }
 
-    public FixerClient(HttpClient httpClient, string apiKey, bool isPaidSubscription)
+    public FixerClient(IOptions<FixerOptions> options)
     {
-        ArgumentNullException.ThrowIfNull(httpClient);
-        ArgumentNullException.ThrowIfNull(apiKey);
+        ArgumentNullException.ThrowIfNull(options);
+        ArgumentNullException.ThrowIfNull(options.Value);
 
-        httpClient.BaseAddress = FixerEnvironment.BaseUrl;
-        _httpClient = httpClient;
-
-        FixerEnvironment.ApiKey = apiKey;
-        FixerEnvironment.IsPaidSubscription = isPaidSubscription;
+        FixerEnvironment.ApiKey = options.Value.ApiKey;
+        FixerEnvironment.IsPaidSubscription = options.Value.IsPaidSubscription;
     }
 }
