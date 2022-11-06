@@ -5,39 +5,27 @@ using Fixerr;
 using Fixerr.Models;
 using Xunit;
 
-namespace FixerrTests.ClientTests
+namespace FixerrTests;
+
+public class FixerLatestTest
 {
-    public class FixerLatestTest
+    private IFixerClient systemUnderTest;
+    private readonly Faker<LatestRate> rateFaker;
+
+    public FixerLatestTest()
     {
-        private IFixerClient systemUnderTest;
-        private readonly Faker<LatestRateResponse> rateFaker;
+        rateFaker = new Faker<LatestRate>();
+    }
 
-        public FixerLatestTest()
-        {
-            rateFaker = new Faker<LatestRateResponse>();
-        }
 
-        [Fact]
-        public async Task ShouldThrowNullReferenceException_WhenApiKeyIsNotProvided()
-        {
-            var httpClient = ConfigureDefault.Get("");
-            this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<NullReferenceException>(async () => await systemUnderTest.GetLatestRateAsync());
-        }
+    [Fact]
+    public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
+    {
+        var fakeData = rateFaker.RuleFor(x => x.Success, true).Generate();
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
 
-        [Fact]
-        public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
-        {
-           
-            var fakeData = rateFaker.RuleFor(x => x.Success, true).Generate();
+        var expected = await systemUnderTest.GetLatestRateAsync("USD", apiKey: "123");
 
-            var httpClient = ConfigureDefault.Get(fakeData);
-
-            this.systemUnderTest = new FixerClient(httpClient);
-
-            var expected = await systemUnderTest.GetLatestRateAsync("USD", apiKey: "123");
-
-            Assert.Equal(expected.Success, fakeData.Success);
-        }
+        Assert.Equal(expected.Success, fakeData.Success);
     }
 }

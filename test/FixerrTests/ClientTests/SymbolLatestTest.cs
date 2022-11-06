@@ -5,36 +5,26 @@ using Fixerr;
 using Fixerr.Models;
 using Xunit;
 
-namespace FixerrTests.ClientTests
+namespace FixerrTests;
+
+public class SymbolLatestTest
 {
-    public class SymbolLatestTest
+    private IFixerClient systemUnderTest;
+    private readonly Faker<Symbol> symbolResponseFakeModel;
+
+    public SymbolLatestTest()
     {
-        private IFixerClient systemUnderTest;
-        private Faker<SymbolResponse> symbolResponseFakeModel;
+        this.symbolResponseFakeModel = new Faker<Symbol>();
+    }
 
-        public SymbolLatestTest()
-        {
-            this.symbolResponseFakeModel = new Faker<SymbolResponse>();
-        }
+    [Fact]
+    public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
+    {
+        var fakeData = this.symbolResponseFakeModel.RuleFor(x => x.Success, true).Generate();
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
 
-        [Fact]
-        public async Task ShouldThrowNullReferenceException_WhenApiKeyIsNotProvided()
-        {
-            var httpClient = ConfigureDefault.Get("");
-            this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<NullReferenceException>(async () => await this.systemUnderTest.GetSymbolAsync());
-        }
+        var expected = await this.systemUnderTest.GetSymbolAsync(apiKey: "123");
 
-        [Fact]
-        public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
-        {
-            var fakeData = this.symbolResponseFakeModel.RuleFor(x => x.Success, true).Generate();
-            var httpClient = ConfigureDefault.Get(fakeData);
-            this.systemUnderTest = new FixerClient(httpClient);
-
-            var expected = await this.systemUnderTest.GetSymbolAsync(apiKey: "123");
-
-            Assert.Equal(expected.Success, fakeData.Success);
-        }
+        Assert.Equal(expected.Success, fakeData.Success);
     }
 }

@@ -5,67 +5,59 @@ using Fixerr;
 using Fixerr.Models;
 using Xunit;
 
-namespace FixerrTests.ClientTests
+namespace FixerrTests;
+
+public class ConvertionTest
 {
-    public class ConvertionTest
+    private IFixerClient systemUnderTest;
+    private readonly Faker<CurrencyConverter> currencyConvertResponseFaker;
+
+    public ConvertionTest()
     {
-        private IFixerClient systemUnderTest;
-        private Faker<CurrencyConvertResponse> currencyConvertResponseFaker;
+        currencyConvertResponseFaker = new Faker<CurrencyConverter>();
+    }
 
-        public ConvertionTest()
-        {
-            currencyConvertResponseFaker = new Faker<CurrencyConvertResponse>();
-        }
+    [Fact]
+    public async Task GetConvertionAsync_ShouldThrowException_WhenFromIsNotProvidedAsync()
+    {
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await systemUnderTest.GetCurrencyConverterAsync("", "", 0, null, "123"));
+    }
 
-        [Fact]
-        public async Task GetConvertionAsync_ShouldThrowException_WhenFromIsNotProvidedAsync()
-        {
-            var httpClient = ConfigureDefault.Get("");
-            this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<ArgumentException>(async () => await systemUnderTest.GetConvertionAsync("", "", 0,null, "123"));
-        }
+    [Fact]
+    public async Task GetConvertionAsync_ShouldThrowException_WhenToIsNotProvidedAsync()
+    {
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        await Assert.ThrowsAsync<ArgumentException>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "", 0, null, "132"));
+    }
 
-        [Fact]
-        public async Task GetConvertionAsync_ShouldThrowException_WhenToIsNotProvidedAsync()
-        {
-            var httpClient = ConfigureDefault.Get("");
-            this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<ArgumentException>(async () => await systemUnderTest.GetConvertionAsync("as", "", 0, null, "132"));
-        }
+    [Fact]
+    public async Task GetConvertionAsync_ShouldThrowException_WhenAmountIsNotProvidedAsync()
+    {
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        await Assert.ThrowsAsync<ArgumentException>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "a", -1, null, "123"));
+    }
 
-        [Fact]
-        public async Task GetConvertionAsync_ShouldThrowException_WhenAmountIsNotProvidedAsync()
-        {
-            var httpClient = ConfigureDefault.Get("");
-            this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<ArgumentException>(async () => await systemUnderTest.GetConvertionAsync("as", "a", -1, null,"123"));
-        }
+    [Fact]
+    public async Task GetConvertionAsync_ShouldThrowException_WhenApiKeyIsNotProvidedAsync()
+    {
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        await Assert.ThrowsAsync<NullReferenceException>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0));
+    }
 
-        [Fact]
-        public async Task GetConvertionAsync_ShouldThrowException_WhenApiKeyIsNotProvidedAsync()
-        {
-            var httpClient = ConfigureDefault.Get("");
-            this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<NullReferenceException>(async () => await systemUnderTest.GetConvertionAsync("as", "a", 0));
-        }
+    [Fact]
+    public async Task GetConvertionAsync_ShouldThrowException_WhenHistoricDateIsInvalid()
+    {
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        await Assert.ThrowsAsync<Exception>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, "123", "123"));
+    }
 
-        [Fact]
-        public async Task GetConvertionAsync_ShouldThrowException_WhenHistoricDateIsInvalid()
-        {
-            var httpClient = ConfigureDefault.Get("");
-            this.systemUnderTest = new FixerClient(httpClient);
-            await Assert.ThrowsAsync<Exception>(async () => await systemUnderTest.GetConvertionAsync("as", "a", 0, "123", "123"));
-        }
-
-        [Fact]
-        public async Task GetConvertionAsync_ShouldExecute_WhenEverythingIsOkay()
-        {
-            var fakeData = currencyConvertResponseFaker.RuleFor(x => x.Success, true).Generate();
-            var httpClient = ConfigureDefault.Get(fakeData);
-
-            this.systemUnderTest = new FixerClient(httpClient);
-            var expected = await this.systemUnderTest.GetConvertionAsync("as", "as", 0, null, "123");
-            Assert.Equal(expected.Success, fakeData.Success);
-        }
+    [Fact]
+    public async Task GetConvertionAsync_ShouldExecute_WhenEverythingIsOkay()
+    {
+        var fakeData = currencyConvertResponseFaker.RuleFor(x => x.Success, true).Generate();
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        var expected = await this.systemUnderTest.GetCurrencyConverterAsync("as", "as", 0, null, "123");
+        Assert.Equal(expected.Success, fakeData.Success);
     }
 }
