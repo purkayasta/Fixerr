@@ -30,8 +30,9 @@ var apiKey = "";
 builder.Services.AddFixer(apiKey);
 ```
 
-If you chose to go with DI approach then after service registration, you will get a `IFixerClient` that you can access all your requested method.
-```c# Injestion With DI
+## Demo
+
+```c#
 private readonly IFixerClient _fixerClient;
 
 public YourFunction(IFixerClient fixerClient) => _fixerClient = fixerClient;
@@ -45,7 +46,7 @@ public void CallMethod() {
 
 ## F.A.Q:
 - There is also a optional apiKey parameter is added to every method if you need to access different method with different api key. 🎉
-- If anything happens make sure to report using the github issues. Thanks!
+- If anything happens make sure to *report* using the github issues. Thanks!
 
 ## Api Cover
 - [x] Latest Endpoint
