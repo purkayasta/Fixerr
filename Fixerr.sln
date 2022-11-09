@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution_items", "solution_items", "{8E196431-3032-4D0E-A77F-C2B87BFC2A35}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Global

@@ -70,6 +70,10 @@ artifacts/
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 
+# Jetbrains 
+.idea/
+
+
 # StyleCop
 StyleCopReport.xml
 
