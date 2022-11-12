@@ -7,7 +7,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<IsPackable>true</IsPackable>
 		<PackageId>Fixerr</PackageId>
-		<PackageVersion>1.1.0</PackageVersion>
+		<PackageVersion>1.2.0</PackageVersion>
 		<PackageTags>C#, Dotnet Core, Fixer.io, Currency Exchange, Currency Conversion, Fixer Api Client</PackageTags>
 		<Description>Fixerr, an currency converter library for Fixer.IO</Description>
 		<Authors>Pritom Purkayasta</Authors>
