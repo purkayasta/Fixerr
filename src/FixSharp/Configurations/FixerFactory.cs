@@ -9,12 +9,21 @@ namespace Fixerr.Configurations;
 
 public static class FixerFactory
 {
+    /// <summary>
+    /// Create fixer client for api access.
+    /// </summary>
+    /// <param name="httpClient"></param>
+    /// <param name="apiKey">mandatory**</param>
+    /// <param name="isPaidSubscription"></param>
+    /// <returns></returns>
     public static IFixerClient CreateFixerClient(HttpClient httpClient, string apiKey, bool isPaidSubscription = false)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
-        ArgumentNullException.ThrowIfNull(apiKey);
 
-        FixerOptions fixerOptions = new FixerOptions
+        if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey))
+            throw new ArgumentNullException(nameof(apiKey) + " is null or empty. Please provide a valid value");
+
+        var fixerOptions = new FixerOptions
         {
             ApiKey = apiKey,
             IsPaidSubscription = isPaidSubscription

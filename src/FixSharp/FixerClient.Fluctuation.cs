@@ -12,28 +12,28 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<Fluctuation> GetFluctuationAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
+    public async Task<Fluctuation?> GetFluctuationAsync(string startDate, string endDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
     {
         string url = BuildFluctuationUrl(startDate, endDate, baseCurrency, symbols, apiKey);
 
-        var streamResponse = await HttpClient.GetStreamAsync(url);
+        var streamResponse = await HttpClient!.GetStreamAsync(url);
         var fluctuationResponse = await JsonSerializer.DeserializeAsync<Fluctuation>(streamResponse).ConfigureAwait(false);
         return fluctuationResponse;
     }
 
-    public Task<HttpResponseMessage> GetFluctuationRawAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
+    public Task<HttpResponseMessage> GetFluctuationRawAsync(string startDate, string endDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
     {
         string url = BuildFluctuationUrl(startDate, endDate, baseCurrency, symbols, apiKey);
-        return HttpClient.GetAsync(url);
+        return HttpClient!.GetAsync(url);
     }
 
-    public Task<string> GetFluctuationStringAsync(string startDate, string endDate, string baseCurrency = null, string symbols = null, string apiKey = null)
+    public Task<string> GetFluctuationStringAsync(string startDate, string endDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
     {
         string url = BuildTimeSeriesUrl(startDate, endDate, baseCurrency, symbols, apiKey);
-        return HttpClient.GetStringAsync(url);
+        return HttpClient!.GetStringAsync(url);
     }
 
-    private static string BuildFluctuationUrl(string startDate, string endDate, string baseCurrency, string symbols, string apiKey)
+    private static string BuildFluctuationUrl(string startDate, string endDate, string? baseCurrency, string? symbols, string? apiKey)
     {
         if (string.IsNullOrEmpty(startDate) || string.IsNullOrWhiteSpace(startDate)) throw new ArgumentNullException("Start Date is Required");
         if (string.IsNullOrEmpty(endDate) || string.IsNullOrWhiteSpace(endDate)) throw new ArgumentNullException("End Date is Required");

@@ -27,7 +27,7 @@ public static class FixerExtensions
     }
 
     /// <summary>
-    /// 
+    /// Add fixer using apikey and subscription flag for https
     /// </summary>
     /// <param name="serviceCollection"></param>
     /// <param name="apiKey"></param>
@@ -37,7 +37,8 @@ public static class FixerExtensions
     /// <exception cref="NullReferenceException"></exception>
     public static void AddFixer(this IServiceCollection serviceCollection, string apiKey, bool isPaidSubscription)
     {
-        if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey)) throw new NullReferenceException("Please provider proper api key for FIXER!!");
+        if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey)) 
+            throw new NullReferenceException("Please provider proper api key for FIXER!!");
 
         AddHttpClient(serviceCollection);
 
@@ -51,8 +52,6 @@ public static class FixerExtensions
     #endregion
 
 
-    private static void AddHttpClient(IServiceCollection serviceCollection)
-    {
-        serviceCollection.AddHttpClient(FixerEnvironment.httpClientName);
-    }
+    private static void AddHttpClient(IServiceCollection serviceCollection) 
+        => serviceCollection.AddHttpClient(FixerEnvironment.HttpClientName);
 }

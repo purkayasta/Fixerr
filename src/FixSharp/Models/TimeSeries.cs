@@ -16,8 +16,8 @@ public sealed class TimeSeries : BaseResponse
     public DateTime? EndDate { get; set; }
 
     [JsonPropertyName("base")]
-    public string Base { get; set; }
+    public string? Base { get; set; }
 
     [JsonPropertyName("rates")]
-    public Dictionary<string, Dictionary<string, double>> Rates { get; set; }
+    public Dictionary<string, Dictionary<string, double>>? Rates { get; set; }
 }

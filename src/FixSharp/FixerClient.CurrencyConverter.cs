@@ -13,31 +13,38 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<CurrencyConverter> GetCurrencyConverterAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
+    public async Task<CurrencyConverter?> GetCurrencyConverterAsync(string from, string to, int amount,
+        string? historialDate = null, string? apiKey = null)
     {
-        string url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
+        var url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
 
-        var streamResponse = await HttpClient.GetStreamAsync(url);
-        var convertResponse = await JsonSerializer.DeserializeAsync<CurrencyConverter>(streamResponse).ConfigureAwait(false);
+        var streamResponse = await HttpClient!.GetStreamAsync(url);
+        var convertResponse =
+            await JsonSerializer.DeserializeAsync<CurrencyConverter>(streamResponse).ConfigureAwait(false);
         return convertResponse;
     }
 
-    public Task<HttpResponseMessage> GetCurrencyConverterRawAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
+    public Task<HttpResponseMessage> GetCurrencyConverterRawAsync(string from, string to, int amount,
+        string? historialDate = null, string? apiKey = null)
     {
-        string url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
-        return HttpClient.GetAsync(url);
+        var url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
+        return HttpClient!.GetAsync(url);
     }
 
-    public Task<string> GetCurrencyConverterStringAsync(string from, string to, int amount, string historialDate = null, string apiKey = null)
+    public Task<string> GetCurrencyConverterStringAsync(string from, string to, int amount,
+        string? historialDate = null,
+        string? apiKey = null)
     {
-        string url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
-        return HttpClient.GetStringAsync(url);
+        var url = BuildCurrencyUrl(from, to, amount, historialDate, apiKey);
+        return HttpClient!.GetStringAsync(url);
     }
 
-    private static string BuildCurrencyUrl(string from, string to, int amount, string historialDate, string apiKey)
+    private static string BuildCurrencyUrl(string? from, string? to, int amount, string? historialDate, string? apiKey)
     {
-        if (string.IsNullOrEmpty(from) || string.IsNullOrWhiteSpace(from)) throw new ArgumentNullException("From parameter is required");
-        if (string.IsNullOrEmpty(to) || string.IsNullOrWhiteSpace(to)) throw new ArgumentNullException("To parameter is required");
+        if (string.IsNullOrEmpty(from) || string.IsNullOrWhiteSpace(from))
+            throw new ArgumentException(nameof(from) + " is required");
+        if (string.IsNullOrEmpty(to) || string.IsNullOrWhiteSpace(to))
+            throw new ArgumentException(nameof(to) + " is required");
         if (amount < 0) throw new InvalidDataException("Amount is required");
 
         StringBuilder urlBuilder = new();
@@ -48,13 +55,13 @@ internal sealed partial class FixerClient : IFixerClient
         urlBuilder.Append("&to={to}");
         urlBuilder.Append("&amount={amount}");
 
-        if (!string.IsNullOrEmpty(historialDate))
-        {
-            if (DateOnly.TryParseExact(historialDate, FixerEnvironment.FixerDateFormat, out DateOnly _))
-                urlBuilder.Append($"&date={historialDate}");
-            else
-                throw new InvalidDataException($" {historialDate} => is not valid, please fix it {nameof(historialDate)}");
-        }
+        if (string.IsNullOrEmpty(historialDate)) return urlBuilder.ToString();
+
+        if (DateOnly.TryParseExact(historialDate, FixerEnvironment.FixerDateFormat, out DateOnly _))
+            urlBuilder.Append($"&date={historialDate}");
+        else
+            throw new InvalidDataException(
+                $" {historialDate} => is not valid, please fix it {nameof(historialDate)}");
 
         return urlBuilder.ToString();
     }

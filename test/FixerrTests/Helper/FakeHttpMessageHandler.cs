@@ -3,20 +3,19 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FixerrTests.Helper
+namespace FixerrTests.Helper;
+
+internal class FakeHttpMessageHandler : HttpMessageHandler
 {
-    internal class FakeHttpMessageHandler : HttpMessageHandler
+    private readonly Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> _sendAsync;
+
+    public FakeHttpMessageHandler(Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync)
     {
-        private readonly Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> _sendAsync;
+        _sendAsync = sendAsync;
+    }
 
-        public FakeHttpMessageHandler(Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync)
-        {
-            _sendAsync = sendAsync;
-        }
-
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
-            return await _sendAsync(request, cancellationToken);
-        }
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        return await _sendAsync(request, cancellationToken);
     }
 }

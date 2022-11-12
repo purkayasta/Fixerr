@@ -20,15 +20,14 @@ public sealed class LatestRate : BaseResponse
     /// </summary>
 
     [JsonPropertyName("base")]
-    public string Base { get; set; }
+    public string? Base { get; set; }
 
-    [JsonPropertyName("date")]
-    public DateTime? Date { get; set; }
+    [JsonPropertyName("date")] public DateTime? Date { get; set; }
 
     /// <summary>
     /// Returns exchange rate data for the currencies you have requested.
     /// </summary>
 
     [JsonPropertyName("rates")]
-    public Dictionary<string, double> Rates { get; set; }
+    public Dictionary<string, double>? Rates { get; set; }
 }

@@ -8,14 +8,15 @@ using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("FixerrTests")]
+
 namespace Fixerr;
 
 internal partial class FixerClient : IFixerClient
 {
-    private HttpClient HttpClient { get; set; }
+    private HttpClient? HttpClient { get; init; }
 
     public FixerClient(IHttpClientFactory httpClientFactory, IOptions<FixerOptions> options)
-        : this(httpClientFactory.CreateClient(FixerEnvironment.httpClientName), options)
+        : this(httpClientFactory.CreateClient(FixerEnvironment.HttpClientName), options)
     {
         ArgumentNullException.ThrowIfNull(httpClientFactory);
     }
@@ -25,12 +26,12 @@ internal partial class FixerClient : IFixerClient
     {
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        httpClient.BaseAddress = FixerEnvironment.BaseUrl;
+        httpClient.BaseAddress = FixerEnvironment.BaseUri;
 
         this.HttpClient = httpClient;
     }
 
-    public FixerClient(IOptions<FixerOptions> options)
+    private FixerClient(IOptions<FixerOptions> options)
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(options.Value);

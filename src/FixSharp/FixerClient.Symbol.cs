@@ -13,28 +13,28 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<Symbol> GetSymbolAsync(string apiKey = null)
+    public async Task<Symbol?> GetSymbolAsync(string? apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
 
-        var streamResponse = await HttpClient.GetStreamAsync(url);
+        var streamResponse = await HttpClient!.GetStreamAsync(url);
         var symbolResponse = await JsonSerializer.DeserializeAsync<Symbol>(streamResponse).ConfigureAwait(false);
         return symbolResponse;
     }
 
-    public Task<HttpResponseMessage> GetSymbolRawAsync(string apiKey = null)
+    public Task<HttpResponseMessage> GetSymbolRawAsync(string? apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
-        return HttpClient.GetAsync(url);
+        return HttpClient!.GetAsync(url);
     }
 
-    public Task<string> GetSymbolStringAsync(string apiKey = null)
+    public Task<string> GetSymbolStringAsync(string? apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
-        return HttpClient.GetStringAsync(url);
+        return HttpClient!.GetStringAsync(url);
     }
 
-    private static string BuildSymbolUrl(string apiKey)
+    private static string BuildSymbolUrl(string? apiKey)
     {
         StringBuilder urlBuilder = new();
         urlBuilder.Append("symbols");

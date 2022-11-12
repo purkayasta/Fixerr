@@ -12,14 +12,14 @@ public partial interface IFixerClient
 {
     /// <summary>returns real time exchange data</summary>
     /// <returns>LatestRate</returns>
-    Task<LatestRate> GetLatestRateAsync(string baseCurrency = null, string symbols = null, string apiKey = null);
+    Task<LatestRate?> GetLatestRateAsync(string? baseCurrency = null, string? symbols = null, string? apiKey = null);
 
     /// <summary>returns real time exchange data</summary>
     /// <returns>HttpResponseMessage</returns>
-    Task<HttpResponseMessage> GetLatestRateRawAsync(string baseCurrency = null, string symbols = null, string apiKey = null);
+    Task<HttpResponseMessage> GetLatestRateRawAsync(string? baseCurrency = null, string? symbols = null, string? apiKey = null);
 
     /// <summary>returns real time exchange data</summary>
     /// <returns>string</returns>
-    Task<string> GetLatestRateStringAsync(string baseCurrency = null, string symbols = null, string apiKey = null);
+    Task<string> GetLatestRateStringAsync(string? baseCurrency = null, string? symbols = null, string? apiKey = null);
 }
 

@@ -10,5 +10,5 @@ namespace Fixerr.Models;
 public sealed class Symbol : BaseResponse
 {
     [JsonPropertyName("symbols")]
-    public Dictionary<string, string> Symbols { get; set; }
+    public Dictionary<string, string>? Symbols { get; set; }
 }
