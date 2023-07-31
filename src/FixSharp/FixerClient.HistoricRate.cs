@@ -13,31 +13,47 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<HistoricRate?> GetHistoricRateAsync(string sourceDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public async Task<HistoricRate?> GetHistoricRateAsync(
+        string sourceDate,
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         string url = BuildHistoricRateUrl(sourceDate, baseCurrency, symbols, apiKey);
 
         var streamResponse = await HttpClient!.GetStreamAsync(url);
-        var historicResponse = await JsonSerializer.DeserializeAsync<HistoricRate>(streamResponse).ConfigureAwait(false);
+        var historicResponse
+            = await JsonSerializer.DeserializeAsync<HistoricRate>(streamResponse).ConfigureAwait(false);
         return historicResponse;
     }
 
-    public Task<HttpResponseMessage> GetHistoricRateRawAsync(string sourceDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public Task<HttpResponseMessage> GetHistoricRateRawAsync(
+        string sourceDate,
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         string url = BuildHistoricRateUrl(sourceDate, baseCurrency, symbols, apiKey);
         return HttpClient!.GetAsync(url);
     }
 
-    public Task<string> GetHistoricRateStringAsync(string sourceDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public Task<string> GetHistoricRateStringAsync(
+        string sourceDate,
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         string url = BuildHistoricRateUrl(sourceDate, baseCurrency, symbols, apiKey);
         return HttpClient!.GetStringAsync(url);
     }
 
-    private static string BuildHistoricRateUrl(string sourceDate, string? baseCurrency, string? symbols, string? apiKey)
+    private static string BuildHistoricRateUrl(
+        string sourceDate,
+        string? baseCurrency,
+        string? symbols,
+        string? apiKey)
     {
-        if (string.IsNullOrEmpty(sourceDate) || string.IsNullOrWhiteSpace(sourceDate)) throw new ArgumentNullException($"{nameof(sourceDate)} is required");
-
+        ArgumentException.ThrowIfNullOrEmpty(sourceDate, nameof(sourceDate));
         if (!DateOnly.TryParseExact(sourceDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new InvalidDataException($"{sourceDate} is not in the valid date format");
 
         StringBuilder urlBuilder = new();

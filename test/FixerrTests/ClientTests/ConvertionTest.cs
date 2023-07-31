@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Bogus;
 using Fixerr;
 using Fixerr.Models;
+using FixerrTests.Helper;
 using Xunit;
 
 namespace FixerrTests;
@@ -20,44 +21,49 @@ public class ConvertionTest
     [Fact]
     public async Task GetConvertionAsync_ShouldThrowException_WhenFromIsNotProvidedAsync()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
-        await Assert.ThrowsAsync<ArgumentNullException>(async () => await systemUnderTest.GetCurrencyConverterAsync("", "", 0, null, "123"));
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            await systemUnderTest.GetCurrencyConverterAsync("", "", 0, null, EnvironmentSecrets.ApiKey));
     }
 
     [Fact]
     public async Task GetConvertionAsync_ShouldThrowException_WhenToIsNotProvidedAsync()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
-        await Assert.ThrowsAsync<ArgumentException>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "", 0, null, "132"));
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
+        await Assert.ThrowsAsync<ArgumentException>(async () =>
+            await systemUnderTest.GetCurrencyConverterAsync("as", "", 0, null, EnvironmentSecrets.ApiKey));
     }
 
     [Fact]
     public async Task GetConvertionAsync_ShouldThrowException_WhenAmountIsNotProvidedAsync()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
-        await Assert.ThrowsAsync<ArgumentException>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "a", -1, null, "123"));
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
+        await Assert.ThrowsAsync<ArgumentException>(async () =>
+            await systemUnderTest.GetCurrencyConverterAsync("as", "a", -1, null, EnvironmentSecrets.ApiKey));
     }
 
     [Fact]
     public async Task GetConvertionAsync_ShouldThrowException_WhenApiKeyIsNotProvidedAsync()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
-        await Assert.ThrowsAsync<NullReferenceException>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0));
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
+        await Assert.ThrowsAsync<NullReferenceException>(async () =>
+            await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, apiKey: EnvironmentSecrets.ApiKey));
     }
 
     [Fact]
     public async Task GetConvertionAsync_ShouldThrowException_WhenHistoricDateIsInvalid()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
-        await Assert.ThrowsAsync<Exception>(async () => await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, "123", "123"));
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
+        await Assert.ThrowsAsync<Exception>(async () =>
+            await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, "123", EnvironmentSecrets.ApiKey));
     }
 
     [Fact]
     public async Task GetConvertionAsync_ShouldExecute_WhenEverythingIsOkay()
     {
         var fakeData = currencyConvertResponseFaker.RuleFor(x => x.Success, true).Generate();
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
-        var expected = await this.systemUnderTest.GetCurrencyConverterAsync("as", "as", 0, null, "123");
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
+        var expected = await this.systemUnderTest.GetCurrencyConverterAsync("as", "as", 0, null, EnvironmentSecrets.ApiKey);
         Assert.Equal(expected.Success, fakeData.Success);
     }
 }

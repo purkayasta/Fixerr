@@ -10,13 +10,12 @@ public class FixerClientTest
     [Fact]
     public void ShouldThrowException_WhenOptions_IsNotGiven()
     {
-        Assert.Throws<ArgumentNullException>(() => new FixerClient(httpClient: new HttpClient(), null));
+        Assert.Throws<ArgumentNullException>(() => new FixerClient(httpClient: new HttpClient()));
     }
 
     [Fact]
     public void ShouldThrowException_WhenHttpClient_IsNotProvided()
     {
-        Assert
-            .Throws<ArgumentNullException>(() => new FixerClient(httpClient: null, null));
+        Assert.Throws<ArgumentNullException>(() => new FixerClient(httpClient: null));
     }
 }

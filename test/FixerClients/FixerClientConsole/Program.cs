@@ -1,5 +1,6 @@
 ﻿using Fixerr;
 using Fixerr.Configurations;
+using Fixerr.Installer;
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");

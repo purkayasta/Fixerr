@@ -20,14 +20,14 @@ public class FluctuationTest
     [Fact]
     public async Task FluctuationTest_ShouldThrowExceptionWhen_StartDateIsNotProvidedAsync()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await this.systemUnderTest.GetFluctuationAsync("", "", null, "123"));
     }
 
     [Fact]
     public async Task FluctuationTest_ShouldThrowExceptionWhen_EndDateIsNotProvidedAsync()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await this.systemUnderTest.GetFluctuationAsync("2011-01-01", "", null, null, "132"));
     }
@@ -35,7 +35,7 @@ public class FluctuationTest
     [Fact]
     public async Task FluctuationTest_ShouldThrowExceptionWhen_EndDateIsNotValidsync()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         await Assert.ThrowsAsync<InvalidDataException>(async () => await this.systemUnderTest.GetFluctuationAsync("2011-01-01", "20", apiKey: "123"));
     }
@@ -45,7 +45,7 @@ public class FluctuationTest
     {
         var fakeData = this.fluctuationFaker.RuleFor(x => x.Success, true).Generate();
 
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         var expected = await this.systemUnderTest.GetFluctuationAsync("2011-01-01", "2011-01-01", apiKey: "123");
 

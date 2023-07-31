@@ -13,26 +13,38 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<LatestRate?> GetLatestRateAsync(string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public async Task<LatestRate?> GetLatestRateAsync(
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
         var streamResponse = await HttpClient!.GetStreamAsync(url);
         return await JsonSerializer.DeserializeAsync<LatestRate>(streamResponse).ConfigureAwait(false);
     }
 
-    public Task<HttpResponseMessage> GetLatestRateRawAsync(string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public Task<HttpResponseMessage> GetLatestRateRawAsync(
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
         return HttpClient!.GetAsync(url);
     }
 
-    public Task<string> GetLatestRateStringAsync(string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public Task<string> GetLatestRateStringAsync(
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
         return HttpClient!.GetStringAsync(url);
     }
 
-    private static string BuildLatestRateUrl(string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    private static string BuildLatestRateUrl(
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         StringBuilder urlBuilder = new();
         urlBuilder.Append("latest");

@@ -22,7 +22,7 @@ public class FixerLatestTest
     public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
     {
         var fakeData = rateFaker.RuleFor(x => x.Success, true).Generate();
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         var expected = await systemUnderTest.GetLatestRateAsync("USD", apiKey: "123");
 

@@ -6,7 +6,7 @@
 namespace Fixerr.Configurations;
 internal static class FixerEnvironment
 {
-    internal const string HttpClientName = "FixerHttpClient";
+    internal const string HttpClientName = "Fixerr";
     private const string BaseUrl = "data.fixer.io/api/";
     internal static Uri BaseUri => IsPaidSubscription ? new Uri($"https://{BaseUrl}") : new Uri($"http://{BaseUrl}");
     internal static string FixerDateFormat { get; } = "yyyy-MM-dd";

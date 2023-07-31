@@ -1,7 +1,7 @@
 ﻿namespace Fixerr.Configurations;
 
-public class FixerOptions
+public sealed class FixerOptions
 {
-    public required string ApiKey { get; set; }
+    public string? ApiKey { get; set; }
     public bool IsPaidSubscription { get; set; }
 }
