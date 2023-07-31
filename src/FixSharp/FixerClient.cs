@@ -27,7 +27,7 @@ internal partial class FixerClient : IFixerClient
         ArgumentNullException.ThrowIfNull(httpClient);
         ArgumentNullException.ThrowIfNull(options);
 
-        FixerEnvironment.ApiKey = options.Value.ApiKey;
+        FixerEnvironment.ApiKey = options.Value.ApiKey!;
         FixerEnvironment.IsPaidSubscription = options.Value.IsPaidSubscription;
     }
 }

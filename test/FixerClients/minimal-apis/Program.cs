@@ -1,5 +1,6 @@
 using Fixerr;
 using Fixerr.Configurations;
+using Fixerr.Installer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddFixer("");
+builder.Services.AddFixer(string.Empty);
 
 var app = builder.Build();
 
