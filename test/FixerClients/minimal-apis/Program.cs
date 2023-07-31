@@ -1,6 +1,5 @@
-using Fixerr;
-using Fixerr.Configurations;
 using Fixerr.Installer;
+using Fixerr;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -19,15 +19,12 @@
 			FREE TO USE TO CONNECT THE WORLD
 		</Copyright>
 		<Title>Fixerr</Title>
-		<PackageIcon>fixerr_icon.png</PackageIcon>
+		<PackageIcon>images/fixerr_icon.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
 	<ItemGroup>
@@ -45,6 +42,7 @@
 		<None Update="images\fixerr_icon.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 </Project>

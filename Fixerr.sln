@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33027.239
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44D7EE7A-BBCF-4EFF-86C9-F23F2CE53435}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixerr", "src\FixSharp\Fixerr.csproj", "{64430A71-366C-4506-990A-D9E73A2AB466}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixerr", "src\Fixerr\Fixerr.csproj", "{64430A71-366C-4506-990A-D9E73A2AB466}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B5403922-28CD-4E05-9357-AF0609CC8E0F}"
 EndProject

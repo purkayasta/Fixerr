@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FixSharp\Fixerr.csproj" />
+    <ProjectReference Include="..\..\src\Fixerr\Fixerr.csproj" />
   </ItemGroup>
 
 </Project>
