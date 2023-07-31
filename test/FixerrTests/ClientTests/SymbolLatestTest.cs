@@ -21,7 +21,7 @@ public class SymbolLatestTest
     public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
     {
         var fakeData = this.symbolResponseFakeModel.RuleFor(x => x.Success, true).Generate();
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         var expected = await this.systemUnderTest.GetSymbolAsync(apiKey: "123");
 

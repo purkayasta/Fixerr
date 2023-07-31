@@ -13,7 +13,12 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<TimeSeries?> GetTimeSeriesAsync(string startDate, string endDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public async Task<TimeSeries?> GetTimeSeriesAsync(
+        string startDate,
+        string endDate,
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         string url = BuildTimeSeriesUrl(startDate, endDate, baseCurrency, symbols, apiKey);
 
@@ -24,22 +29,37 @@ internal sealed partial class FixerClient : IFixerClient
 
 
 
-    public Task<HttpResponseMessage> GetTimeSeriesRawAsync(string startDate, string endDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public Task<HttpResponseMessage> GetTimeSeriesRawAsync(
+        string startDate,
+        string endDate,
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         string url = BuildTimeSeriesUrl(startDate, endDate, baseCurrency, symbols, apiKey);
         return HttpClient!.GetAsync(url);
     }
 
-    public Task<string> GetTimeSeriesStringAsync(string startDate, string endDate, string? baseCurrency = null, string? symbols = null, string? apiKey = null)
+    public Task<string> GetTimeSeriesStringAsync(
+        string startDate,
+        string endDate,
+        string? baseCurrency = null,
+        string? symbols = null,
+        string? apiKey = null)
     {
         string url = BuildTimeSeriesUrl(startDate, endDate, baseCurrency, symbols, apiKey);
         return HttpClient!.GetStringAsync(url);
     }
 
-    private static string BuildTimeSeriesUrl(string startDate, string endDate, string? baseCurrency, string? symbols, string? apiKey)
+    private static string BuildTimeSeriesUrl(
+        string startDate,
+        string endDate,
+        string? baseCurrency,
+        string? symbols,
+        string? apiKey)
     {
-        if (string.IsNullOrEmpty(startDate) || string.IsNullOrWhiteSpace(startDate)) throw new ArgumentNullException("Start Date is Required");
-        if (string.IsNullOrEmpty(endDate) || string.IsNullOrWhiteSpace(endDate)) throw new ArgumentNullException("End Date is Required");
+        ArgumentException.ThrowIfNullOrEmpty(startDate, nameof(startDate));
+        ArgumentException.ThrowIfNullOrEmpty(endDate, nameof(endDate));
 
         if (!DateOnly.TryParseExact(startDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new InvalidDataException("Start date is not in the valid date format");
         if (!DateOnly.TryParseExact(endDate, FixerEnvironment.FixerDateFormat, out DateOnly _)) throw new InvalidDataException("End date is not in the valid date format");

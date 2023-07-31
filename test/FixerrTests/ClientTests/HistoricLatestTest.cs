@@ -22,7 +22,7 @@ public class HistoricLatestTest
     public async Task ShouldGiveSuccessResponse_WhenEverythingIsOk()
     {
         var fakeData = this.historicRateFaker.RuleFor(x => x.Success, true).Generate();
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         var expected = await this.systemUnderTest.GetHistoricRateAsync("2022-05-05", apiKey: "123");
         Assert.Equal(expected.Success, fakeData.Success);
@@ -31,7 +31,7 @@ public class HistoricLatestTest
     [Fact]
     public async Task ShouldThrowException_WhenParamIsNotProvided()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await this.systemUnderTest.GetHistoricRateAsync("", apiKey: "123"));
     }
@@ -39,7 +39,7 @@ public class HistoricLatestTest
     [Fact]
     public async Task ShouldThrowException_WhenSourceDateIsInInvalidState()
     {
-        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""), ConfigureDefault.GetFixerIOptions());
+        this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
 
         await Assert.ThrowsAsync<InvalidDataException>(async () => await this.systemUnderTest.GetHistoricRateAsync("asda", "usd", "usd, bdt", apiKey: "123"));
     }
