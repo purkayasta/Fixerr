@@ -1,5 +1,6 @@
 ﻿using Fixerr.Configurations;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Fixerr.Installer;
 
@@ -18,7 +19,7 @@ public static class FixerExtensions
     /// <exception cref="NullReferenceException"></exception>
     public static void AddFixer(
         this IServiceCollection serviceCollection,
-        string? apiKey,
+        string apiKey,
         bool isPaidSubscription = false)
     {
         ArgumentException.ThrowIfNullOrEmpty(apiKey, nameof(apiKey));

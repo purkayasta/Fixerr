@@ -1,19 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<!--<TargetFrameworks>netstandard2.1; net7.0; net8.0</TargetFrameworks>-->
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>Latest</LangVersion>
+		<WarningsAsErrors>true</WarningsAsErrors>
+
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
 
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<IsPackable>true</IsPackable>
 		<PackageId>Fixerr</PackageId>
-		<PackageVersion>1.3.0</PackageVersion>
+		<PackageVersion>2.0</PackageVersion>
 		<PackageTags>C#, Dotnet Core, Fixer.io, Currency Exchange, Currency Conversion, Fixer Api Client</PackageTags>
 		<Description>Fixerr, an currency converter library for Fixer.IO</Description>
 		<Authors>Pritom Purkayasta</Authors>
 		<RepositoryType>Git</RepositoryType>
 		<RepositoryUrl>https://github.com/purkayasta/Fixerr</RepositoryUrl>
 		<PackageProjectUrl>https://www.nuget.org/packages/Fixerr/</PackageProjectUrl>
+		<PublishUrl>https://www.nuget.org/packages/Fixerr/</PublishUrl>
 		<Copyright>
 			Copyright (c) Pritom Purkayasta All rights reserved.
 			FREE TO USE TO CONNECT THE WORLD
@@ -35,7 +40,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

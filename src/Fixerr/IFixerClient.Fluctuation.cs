@@ -3,6 +3,8 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System.Net.Http;
+using System.Threading.Tasks;
 using Fixerr.Models;
 
 namespace Fixerr;
@@ -18,12 +20,12 @@ public partial interface IFixerClient
     /// <param name="symbols"></param>
     /// <param name="apiKey"></param>
     /// <returns></returns>
-    Task<Fluctuation?> GetFluctuationAsync(
+    Task<Fluctuation> GetFluctuationAsync(
         string startDate,
         string endDate,
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null);
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null);
 
     /// <summary>
     /// returns how currencies fluctuate on a day to day basis
@@ -37,9 +39,9 @@ public partial interface IFixerClient
     Task<HttpResponseMessage> GetFluctuationRawAsync(
         string startDate,
         string endDate,
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null);
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null);
 
 
     /// <summary>
@@ -54,7 +56,7 @@ public partial interface IFixerClient
     Task<string> GetFluctuationStringAsync(
         string startDate,
         string endDate,
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null);
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null);
 }

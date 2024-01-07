@@ -4,8 +4,10 @@
 // ---------------------------------------------------------------
 
 
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Fixerr.Configurations;
 using Fixerr.Models;
 
@@ -13,10 +15,10 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<LatestRate?> GetLatestRateAsync(
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null)
+    public async Task<LatestRate> GetLatestRateAsync(
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
         var streamResponse = await HttpClient!.GetStreamAsync(url);
@@ -24,27 +26,27 @@ internal sealed partial class FixerClient : IFixerClient
     }
 
     public Task<HttpResponseMessage> GetLatestRateRawAsync(
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null)
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
         return HttpClient!.GetAsync(url);
     }
 
     public Task<string> GetLatestRateStringAsync(
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null)
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null)
     {
         var url = BuildLatestRateUrl(baseCurrency, symbols, apiKey);
         return HttpClient!.GetStringAsync(url);
     }
 
     private static string BuildLatestRateUrl(
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null)
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null)
     {
         StringBuilder urlBuilder = new();
         urlBuilder.Append("latest");

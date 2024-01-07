@@ -3,6 +3,8 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System;
+using System.Net.Http;
 using Fixerr.Configurations;
 
 namespace Fixerr.Installer;
@@ -17,8 +19,8 @@ public static class FixerFactory
     /// <param name="isPaidSubscription"></param>
     /// <returns></returns>
     public static IFixerClient CreateFixerClient(
-        HttpClient? httpClient,
-        string? apiKey,
+        HttpClient httpClient,
+        string apiKey,
         bool isPaidSubscription = false)
     {
         ArgumentNullException.ThrowIfNull(httpClient);

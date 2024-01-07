@@ -3,6 +3,8 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System.Net.Http;
+using System.Threading.Tasks;
 using Fixerr.Models;
 
 namespace Fixerr;
@@ -13,17 +15,17 @@ public partial interface IFixerClient
     /// Returns all available currencies
     /// </summary>
     /// <returns>Symbol</returns>
-    Task<Symbol?> GetSymbolAsync(string? apiKey = null);
+    Task<Symbol> GetSymbolAsync(string apiKey = null);
 
     /// <summary>
     /// Returns all available currencies
     /// </summary>
     /// <returns>HttpResponseMessage</returns>
-    Task<HttpResponseMessage> GetSymbolRawAsync(string? apiKey = null);
+    Task<HttpResponseMessage> GetSymbolRawAsync(string apiKey = null);
 
     /// <summary>
     /// Returns all available currencies
     /// </summary>
     /// <returns>string</returns>
-    Task<string> GetSymbolStringAsync(string? apiKey = null);
+    Task<string> GetSymbolStringAsync(string apiKey = null);
 }

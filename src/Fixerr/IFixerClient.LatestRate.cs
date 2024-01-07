@@ -3,6 +3,8 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System.Net.Http;
+using System.Threading.Tasks;
 using Fixerr.Models;
 
 namespace Fixerr;
@@ -16,10 +18,10 @@ public partial interface IFixerClient
     /// <param name="symbols"></param>
     /// <param name="apiKey"></param>
     /// <returns></returns>
-    Task<LatestRate?> GetLatestRateAsync(
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null);
+    Task<LatestRate> GetLatestRateAsync(
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null);
 
     /// <summary>
     /// returns real time exchange data
@@ -29,9 +31,9 @@ public partial interface IFixerClient
     /// <param name="apiKey"></param>
     /// <returns></returns>
     Task<HttpResponseMessage> GetLatestRateRawAsync(
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null);
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null);
 
     /// <summary>
     /// returns real time exchange data
@@ -41,8 +43,8 @@ public partial interface IFixerClient
     /// <param name="apiKey"></param>
     /// <returns></returns>
     Task<string> GetLatestRateStringAsync(
-        string? baseCurrency = null,
-        string? symbols = null,
-        string? apiKey = null);
+        string baseCurrency = null,
+        string symbols = null,
+        string apiKey = null);
 }
 

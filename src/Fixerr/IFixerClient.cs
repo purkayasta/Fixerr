@@ -5,7 +5,4 @@
 
 namespace Fixerr;
 
-public partial interface IFixerClient
-{
-
-}
+public partial interface IFixerClient { }

@@ -3,6 +3,8 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using Fixerr.Configurations;
 using Microsoft.Extensions.Options;
@@ -13,16 +15,16 @@ namespace Fixerr;
 
 internal partial class FixerClient : IFixerClient
 {
-    private HttpClient? HttpClient { get; }
+    private HttpClient HttpClient { get; }
 
-    public FixerClient(HttpClient? httpClient)
+    public FixerClient(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
         httpClient.BaseAddress = FixerEnvironment.BaseUri;
         this.HttpClient = httpClient;
     }
 
-    public FixerClient(HttpClient? httpClient, IOptions<FixerOptions> options)
+    public FixerClient(HttpClient httpClient, IOptions<FixerOptions> options)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
         ArgumentNullException.ThrowIfNull(options);

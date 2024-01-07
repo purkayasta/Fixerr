@@ -4,8 +4,12 @@
 // ---------------------------------------------------------------
 
 
+using System;
+using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Fixerr.Configurations;
 using Fixerr.Models;
 
@@ -13,49 +17,36 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<CurrencyConverter?> GetCurrencyConverterAsync(
+    public async Task<CurrencyConverter> GetCurrencyConverterAsync(
         string from,
         string to,
         int amount,
-        string? historicalDate = null,
-        string? apiKey = null)
+        string historicalDate = null,
+        string apiKey = null)
     {
-        var url = BuildCurrencyUrl(from, to, amount, historicalDate, apiKey);
-
-        var streamResponse = await HttpClient!.GetStreamAsync(url);
-        var convertResponse =
-            await JsonSerializer.DeserializeAsync<CurrencyConverter>(streamResponse).ConfigureAwait(false);
-        return convertResponse;
+        using System.IO.Stream streamResponse = await HttpClient!.GetStreamAsync(BuildCurrencyUrl(from, to, amount, historicalDate, apiKey));
+        return await JsonSerializer.DeserializeAsync<CurrencyConverter>(streamResponse).ConfigureAwait(false);
     }
 
-    public Task<HttpResponseMessage> GetCurrencyConverterRawAsync(
-        string from,
-        string to,
-        int amount,
-        string? historicalDate = null,
-        string? apiKey = null)
-    {
-        var url = BuildCurrencyUrl(from, to, amount, historicalDate, apiKey);
-        return HttpClient!.GetAsync(url);
-    }
+    public Task<HttpResponseMessage> GetCurrencyConverterRawAsync(string from, string to, int amount, string historicalDate = null, string apiKey = null)
+        => HttpClient!.GetAsync(BuildCurrencyUrl(from, to, amount, historicalDate, apiKey));
 
     public Task<string> GetCurrencyConverterStringAsync(
         string from,
         string to,
         int amount,
-        string? historicalDate = null,
-        string? apiKey = null)
+        string historicalDate = null,
+        string apiKey = null)
     {
-        var url = BuildCurrencyUrl(from, to, amount, historicalDate, apiKey);
-        return HttpClient!.GetStringAsync(url);
+        return HttpClient!.GetStringAsync(BuildCurrencyUrl(from, to, amount, historicalDate, apiKey));
     }
 
     private static string BuildCurrencyUrl(
-        string? from,
-        string? to,
+        string from,
+        string to,
         int amount,
-        string? historicalDate,
-        string? apiKey)
+        string historicalDate,
+        string apiKey)
     {
         if (string.IsNullOrEmpty(from) || string.IsNullOrWhiteSpace(from))
             throw new ArgumentException(nameof(from) + " is required");
@@ -76,8 +67,7 @@ internal sealed partial class FixerClient : IFixerClient
         if (DateOnly.TryParseExact(historicalDate, FixerEnvironment.FixerDateFormat, out DateOnly _))
             urlBuilder.Append($"&date={historicalDate}");
         else
-            throw new InvalidDataException(
-                $" {historicalDate} => is not valid, please fix it {nameof(historicalDate)}");
+            throw new InvalidDataException($" {historicalDate} => is not valid, please fix it {nameof(historicalDate)}");
 
         return urlBuilder.ToString();
     }

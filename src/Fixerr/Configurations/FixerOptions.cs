@@ -2,6 +2,6 @@
 
 public sealed class FixerOptions
 {
-    public string? ApiKey { get; set; }
-    public bool IsPaidSubscription { get; set; }
+    public string ApiKey { get; set; } = string.Empty;
+    public bool IsPaidSubscription { get; set; } = false;
 }

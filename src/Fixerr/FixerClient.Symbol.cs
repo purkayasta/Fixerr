@@ -4,8 +4,10 @@
 // ---------------------------------------------------------------
 
 
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Fixerr.Configurations;
 using Fixerr.Models;
 
@@ -13,7 +15,7 @@ namespace Fixerr;
 
 internal sealed partial class FixerClient : IFixerClient
 {
-    public async Task<Symbol?> GetSymbolAsync(string? apiKey = null)
+    public async Task<Symbol> GetSymbolAsync(string apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
 
@@ -22,19 +24,19 @@ internal sealed partial class FixerClient : IFixerClient
         return symbolResponse;
     }
 
-    public Task<HttpResponseMessage> GetSymbolRawAsync(string? apiKey = null)
+    public Task<HttpResponseMessage> GetSymbolRawAsync(string apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
         return HttpClient!.GetAsync(url);
     }
 
-    public Task<string> GetSymbolStringAsync(string? apiKey = null)
+    public Task<string> GetSymbolStringAsync(string apiKey = null)
     {
         string url = BuildSymbolUrl(apiKey);
         return HttpClient!.GetStringAsync(url);
     }
 
-    private static string BuildSymbolUrl(string? apiKey)
+    private static string BuildSymbolUrl(string apiKey)
     {
         StringBuilder urlBuilder = new();
         urlBuilder.Append("symbols");

@@ -3,6 +3,8 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System;
+
 namespace Fixerr.Configurations;
 internal static class FixerEnvironment
 {

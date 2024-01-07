@@ -3,19 +3,21 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Fixerr.Models;
 
 public sealed class Fluctuation : BaseResponse
 {
-    [JsonPropertyName("start_date")] public DateTime? StartDate { get; set; }
+    [JsonPropertyName("start_date")] public DateTime StartDate { get; set; }
 
-    [JsonPropertyName("end_date")] public DateTime? EndDate { get; set; }
+    [JsonPropertyName("end_date")] public DateTime EndDate { get; set; }
 
-    [JsonPropertyName("base")] public string? Base { get; set; }
+    [JsonPropertyName("base")] public string Base { get; set; }
 
-    [JsonPropertyName("rates")] public Dictionary<string, FluctuationRateInfo>? Rates { get; set; }
+    [JsonPropertyName("rates")] public Dictionary<string, FluctuationRateInfo> Rates { get; set; }
 }
 
 public sealed class FluctuationRateInfo
