@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Bogus;
 using Fixerr;
 using Fixerr.Models;
-using FixerrTests.Helper;
 using Xunit;
 
 namespace FixerrTests;
@@ -23,7 +22,7 @@ public class ConvertionTest
     {
         this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await systemUnderTest.GetCurrencyConverterAsync("", "", 0, null, EnvironmentSecrets.ApiKey));
+            await systemUnderTest.GetCurrencyConverterAsync("", "", 0, null, ""));
     }
 
     [Fact]
@@ -31,7 +30,7 @@ public class ConvertionTest
     {
         this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
         await Assert.ThrowsAsync<ArgumentException>(async () =>
-            await systemUnderTest.GetCurrencyConverterAsync("as", "", 0, null, EnvironmentSecrets.ApiKey));
+            await systemUnderTest.GetCurrencyConverterAsync("as", "", 0, null, ""));
     }
 
     [Fact]
@@ -39,7 +38,7 @@ public class ConvertionTest
     {
         this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
         await Assert.ThrowsAsync<ArgumentException>(async () =>
-            await systemUnderTest.GetCurrencyConverterAsync("as", "a", -1, null, EnvironmentSecrets.ApiKey));
+            await systemUnderTest.GetCurrencyConverterAsync("as", "a", -1, null, ""));
     }
 
     [Fact]
@@ -47,7 +46,7 @@ public class ConvertionTest
     {
         this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
         await Assert.ThrowsAsync<NullReferenceException>(async () =>
-            await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, apiKey: EnvironmentSecrets.ApiKey));
+            await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, apiKey: ""));
     }
 
     [Fact]
@@ -55,7 +54,7 @@ public class ConvertionTest
     {
         this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
         await Assert.ThrowsAsync<Exception>(async () =>
-            await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, "123", EnvironmentSecrets.ApiKey));
+            await systemUnderTest.GetCurrencyConverterAsync("as", "a", 0, "123", ""));
     }
 
     [Fact]
@@ -63,7 +62,7 @@ public class ConvertionTest
     {
         var fakeData = currencyConvertResponseFaker.RuleFor(x => x.Success, true).Generate();
         this.systemUnderTest = new FixerClient(ConfigureDefault.Get(""));
-        var expected = await this.systemUnderTest.GetCurrencyConverterAsync("as", "as", 0, null, EnvironmentSecrets.ApiKey);
+        var expected = await this.systemUnderTest.GetCurrencyConverterAsync("as", "as", 0, null, "");
         Assert.Equal(expected.Success, fakeData.Success);
     }
 }
